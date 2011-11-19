@@ -4,6 +4,7 @@ if (typeof load != 'undefined') {
   load('../array.js');
   load('../string.js');
   load('../strconv.js');
+  load('../date.js');
 }
 
 function sprintfTest() {
@@ -32,6 +33,33 @@ function strConvTest() {
   stdout('toZenkaku("sample test") = '+ toZenkaku('sample text'));
 }
 
+function dateFormatTest() {
+  stdout('Test dateFormat ...');
+  var d = new Date();
+  stdout(dateFormat('yyyy-MM-dd E', d));
+  stdout(dateFormat('M/d a hh:mm:ss.SZ', d));
+  stdout(dateFormat('MMM, yy', d));
+}
+
+function nativeDateTest() {
+  stdout('Test Date#method ...');
+  var d = new Date();
+  stdout(d.toString());
+  stdout(d.toUTCString());
+  stdout(d.toLocaleString());
+  stdout(d.toJSON && d.toJSON());
+  stdout(d.getTime());
+  stdout(d.getFullYear());
+  stdout(d.getMonth());
+  stdout(d.getDate());
+  stdout(d.getDay());
+  stdout(d.getHours());
+  stdout(d.getMinutes());
+  stdout(d.getSeconds());
+  stdout(d.getMilliseconds());
+  stdout(d.getTimezoneOffset());
+}
+
 function mainTest() {
   var d = +new Date;
 
@@ -39,6 +67,7 @@ function mainTest() {
   rangeTest();
   genRandomStringTest();
   strConvTest();
+  dateFormatTest();
 
   stdout((new Date - d) +'ms');
 }
