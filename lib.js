@@ -10,6 +10,9 @@ function stdout(s) {
   else if (typeof WScript !== 'undefined') {
     WScript.echo(s);
   }
+  else if (typeof console !== 'undefined') {
+    console.log(s);
+  }
   else if (typeof print !== 'undefined') {
     print(s);
   }
@@ -31,10 +34,10 @@ function assert(b, s) {
  */
  
 function bench(f, opt_ms) {
-  var b = +new Date,
+	var b = Date.now(),
       i = 0;
   if (!opt_ms) { opt_ms = 1000; }
-  for (; new Date - b < opt_ms; i++) {
+  for (; Date.now() - b < opt_ms; i++) {
     f();
   }
   return i * 1000 / opt_ms;
