@@ -23,7 +23,7 @@ http.createServer(function(req, res) {
       res.end('Hello World\n');
     return;
   } else {
-    var reqUrl = require('url').parse(req.url), body;
+    var reqUrl = req.url, body;
     console.log(reqUrl);
     if (reqUrl === '/') {
       reqUrl = '/index.html';
