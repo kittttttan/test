@@ -61,7 +61,7 @@ function nativeDateTest() {
 }
 
 function mainTest() {
-  var d = +new Date;
+  var d = Date.now();
 
   sprintfTest();
   rangeTest();
@@ -69,7 +69,7 @@ function mainTest() {
   strConvTest();
   dateFormatTest();
 
-  stdout((new Date - d) +'ms');
+  stdout((Date.now() - d) +'ms');
 }
 
 mainTest();

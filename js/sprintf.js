@@ -36,7 +36,7 @@ function sprintf(str) {
         s = (flag === '+' && argv[index] > 0 ? '+' : '') +
             (prec ? argv[index].toFixed(prec) : argv[index].toString());
       }
-      index++;
+      ++index;
       if (width > s.length) {
         var prefix = repeatString((flag === '0' ? '0': ' '), width);
         if (flag === '-') {

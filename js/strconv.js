@@ -55,7 +55,7 @@ function toZenkakuKatakana(str) {
 var conv = [], c  = '', n = 0,
     zen = "。「」、ヲァィゥェォャュョッアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン゛゜".split(''),
     han = "｡｢｣､ｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝﾞﾟ".split('');
-  for (var i = 0, l = str.length; i < l; i++) {
+  for (var i = 0, l = str.length; i < l; ++i) {
     c = str.charAt(i);
     n = han.indexOf(c);
     if (n > -1) {
@@ -86,7 +86,7 @@ function toHankakuKatakana(str) {
 var conv = [], c  = '', n = 0,
     zen = "。「」、ヲァィゥェォャュョッアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン゛゜".split(''),
     han = "｡｢｣､ｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝﾞﾟ".split('');
-  for (var i = 0, l = str.length; i < l; i++) {
+  for (var i = 0, l = str.length; i < l; ++i) {
     c = str.charAt(i);
     n = zen.indexOf(c);
     if (n > -1) {

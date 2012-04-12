@@ -43,7 +43,7 @@ function every(a, f) {
  */
 function filter(a, f) {
   var aNew = [];
-  for (var i = 0, l = a.length; i < l; i++) {
+  for (var i = 0, l = a.length; i < l; ++i) {
     if (func(aNew[i])) {
       aNew.push(a[i]);
     }
@@ -56,7 +56,7 @@ function filter(a, f) {
  * @param {function} f
  */
 function forEach(a, f) {
-  for (var i = 0, l = a.length; i < l; i++) {
+  for (var i = 0, l = a.length; i < l; ++i) {
     f(a[i]);
   }
 }
@@ -81,7 +81,7 @@ function map(a, f) {
  */
 function reduce(a, f) {
   var out = a[0];
-  for (var i = 1, l = a.length; i < l; i++) {
+  for (var i = 1, l = a.length; i < l; ++i) {
     out = f(out, a[i]);
   }
   return out;
@@ -106,7 +106,7 @@ function reduceRight(a, f) {
  */
 function sum(a) {
   var s = 0;
-  for (var i = 0, l = a.length; i < l; i++) {
+  for (var i = 0, l = a.length; i < l; ++i) {
     s += a[i];
   }
   return s;
@@ -118,7 +118,7 @@ function sum(a) {
  */
 function average(a) {
   var s = 0, l = a.length;
-  for (var i = 0; i < l; i++) {
+  for (var i = 0; i < l; ++i) {
     s += a[i];
   }
   return s / parseFloat(l);
@@ -130,7 +130,7 @@ function average(a) {
  */
 function unique(a) {
   var b = [];
-  for (var i = 0, l = a.length; i < l; i++) {
+  for (var i = 0, l = a.length; i < l; ++i) {
     if (b.indexOf(a[i]) < 0) { b.push(a[i]); }
   }
   return b;

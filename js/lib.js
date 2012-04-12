@@ -37,7 +37,7 @@ function bench(f, opt_ms) {
 	var b = Date.now(),
       i = 0;
   if (!opt_ms) { opt_ms = 1000; }
-  for (; Date.now() - b < opt_ms; i++) {
+  for (; Date.now() - b < opt_ms; ++i) {
     f();
   }
   return i * 1000 / opt_ms;

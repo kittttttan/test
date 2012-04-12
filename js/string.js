@@ -71,7 +71,7 @@ function genRandomString(len, opt_filter) {
 	if (!((opt_filter >> 4) & 1)) letter += '!\"#$%&\'()=~|-^\@[;:],./`{+*}>?';
 	if (!((opt_filter >> 5) & 1)) letter += '(`~!@#$%^&*()_+-={}|[]\\:\";\'<>?,./)';
 
-	for (var i = 0, range = letter.length + 1; i < len; i++) {
+	for (var i = 0, range = letter.length + 1; i < len; ++i) {
 		str += letter.charAt(Math.random() * range | 0);
 	}
 
