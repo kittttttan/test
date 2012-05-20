@@ -1,6 +1,7 @@
 *_compiled.js
 *_.*
 *.csproj.*
+*.suo
 
 bin/
 obj/
