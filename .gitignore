@@ -1,2 +1,6 @@
 *_compiled.js
 *_.*
+*.csproj.*
+
+bin/
+obj/
