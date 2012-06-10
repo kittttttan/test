@@ -116,7 +116,7 @@
             // openOToolStripMenuItem
             // 
             this.openOToolStripMenuItem.Name = "openOToolStripMenuItem";
-            this.openOToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openOToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.openOToolStripMenuItem.Text = "Open(&O)";
             this.openOToolStripMenuItem.ToolTipText = "Add files to list box";
             this.openOToolStripMenuItem.Click += new System.EventHandler(this.openOToolStripMenuItem_Click);
@@ -124,7 +124,7 @@
             // folderFToolStripMenuItem
             // 
             this.folderFToolStripMenuItem.Name = "folderFToolStripMenuItem";
-            this.folderFToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.folderFToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.folderFToolStripMenuItem.Text = "Folder(&F)";
             this.folderFToolStripMenuItem.ToolTipText = "Add files in the selected folder to list box";
             this.folderFToolStripMenuItem.Click += new System.EventHandler(this.folderFToolStripMenuItem_Click);
@@ -137,7 +137,7 @@
             // saveSToolStripMenuItem
             // 
             this.saveSToolStripMenuItem.Name = "saveSToolStripMenuItem";
-            this.saveSToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveSToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.saveSToolStripMenuItem.Text = "Save(&S)";
             this.saveSToolStripMenuItem.ToolTipText = "Save file list";
             this.saveSToolStripMenuItem.Click += new System.EventHandler(this.saveSToolStripMenuItem_Click);
@@ -145,7 +145,7 @@
             // importIToolStripMenuItem
             // 
             this.importIToolStripMenuItem.Name = "importIToolStripMenuItem";
-            this.importIToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importIToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.importIToolStripMenuItem.Text = "Import(&I)";
             this.importIToolStripMenuItem.ToolTipText = "Load file list";
             this.importIToolStripMenuItem.Click += new System.EventHandler(this.importIToolStripMenuItem_Click);
