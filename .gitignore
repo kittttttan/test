@@ -2,6 +2,17 @@
 *_.*
 *.csproj.*
 *.suo
+*.idb
+*.pdb
+*.dat
+*.o
+*.exe
+*.ipch
+*.sdf
+*.user
+*.filters
 
 bin/
 obj/
+Debug/
+Release/
