@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:BinaryViewer" 
-        Title="MainWindow" Height="350" Width="367" PreviewDragOver="Window_PreviewDragOver" PreviewDrop="Window_Drop" AllowDrop="True" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="MainWindow" Height="350" Width="400" PreviewDragOver="Window_PreviewDragOver" PreviewDrop="Window_Drop" AllowDrop="True" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="23" />
@@ -20,15 +20,37 @@
                 <MenuItem Header="Open(_O)" Click="MenuItem_Setting_Open_Click" />
                 <MenuItem Header="Save(_S)" Click="MenuItem_Setting_Save_Click" />
             </MenuItem>
+            <MenuItem Header="Edit(_E)">
+                <MenuItem Header="Cut(_T)" Click="MenuItem_Cut_Click" InputGestureText="Ctrl+X" />
+                <MenuItem Header="Copy(_C)" Click="MenuItem_Copy_Click" InputGestureText="Ctrl+C" />
+                <MenuItem Header="Paste(_P)" Click="MenuItem_Paste_Click" InputGestureText="Ctrl+V" />
+                <MenuItem Header="Delete(_D)" Click="MenuItem_Delete_Click" InputGestureText="Del" />
+                <MenuItem Header="DeleteAll" Click="MenuItem_DeleteAll_Click" />
+                <Separator />
+                <MenuItem Header="Add(_A)" Click="MenuItem_Add_Click" />
+                <MenuItem Header="Insert(_I)" Click="MenuItem_Insert_Click" />
+            </MenuItem>
         </Menu>
         <StatusBar Grid.Row="2" Name="statusBar1" Height="23" VerticalAlignment="Bottom" />
-        <DataGrid Grid.Row="1" Name="dataGrid1" SelectionMode="Single">
+        <DataGrid Grid.Row="1" Name="dataGrid1" SelectionMode="Extended">
+            <DataGrid.CommandBindings>
+                <CommandBinding Command="{x:Static local:MainWindow.CutCommand}" Executed="CutExecuted"/>
+                <CommandBinding Command="{x:Static local:MainWindow.CopyCommand}" Executed="CopyExecuted"/>
+                <CommandBinding Command="{x:Static local:MainWindow.PasteCommand}" Executed="PasteExecuted"/>
+                <CommandBinding Command="{x:Static local:MainWindow.DelCommand}" Executed="DelExecuted"/>
+            </DataGrid.CommandBindings>
+            <DataGrid.InputBindings>
+                <KeyBinding Modifiers="Ctrl" Key="X" Command="{x:Static local:MainWindow.CutCommand}" />
+                <KeyBinding Modifiers="Ctrl" Key="C" Command="{x:Static local:MainWindow.CopyCommand}" />
+                <KeyBinding Modifiers="Ctrl" Key="V" Command="{x:Static local:MainWindow.PasteCommand}" />
+                <KeyBinding Key="Del" Command="{x:Static local:MainWindow.DelCommand}" />
+            </DataGrid.InputBindings>
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Add" Click="MenuItem_Add_Click" />
-                    <MenuItem Header="Insert" Click="MenuItem_Insert_Click" />
-                    <MenuItem Header="Delete" Click="MenuItem_Delete_Click" />
-                    <MenuItem Header="DeleteAll" Click="MenuItem_DeleteAll_Click" />
+                    <MenuItem Header="Cut(_T)" Click="MenuItem_Cut_Click" InputGestureText="Ctrl+X" />
+                    <MenuItem Header="Copy(_C)" Click="MenuItem_Copy_Click" InputGestureText="Ctrl+C" />
+                    <MenuItem Header="Paste(_P)" Click="MenuItem_Paste_Click" InputGestureText="Ctrl+V" />
+                    <MenuItem Header="Delete(_D)" Click="MenuItem_Delete_Click" InputGestureText="Del" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>

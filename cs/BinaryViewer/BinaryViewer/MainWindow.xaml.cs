@@ -5,22 +5,24 @@
     using System.IO;
     using System.Text;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Documents;
+    using System.Windows.Input;
     using Microsoft.Win32;
 
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class MainWindow : Window {
+        public static RoutedCommand CutCommand = new RoutedCommand();
+        public static RoutedCommand CopyCommand = new RoutedCommand();
+        public static RoutedCommand PasteCommand = new RoutedCommand();
+        public static RoutedCommand DelCommand = new RoutedCommand();
+
         #region Private State
         private const char commentChar = '#';
         private const string backupFile = "bv_setting.bak";
-        private readonly Data defaultData = new Data() {
-            IsEnabled = true,
-            Type = DataType.Int32,
-            Length = 1,
-            Value = "0"
-        };
+        private List<Data> clipBoard = new List<Data>();
         #endregion
 
         #region Initialize
@@ -429,6 +431,10 @@
                             data.Value = ss[3];
                         }
 
+                        if (ss.Length > 4) {
+                            data.Memo = ss[4];
+                        }
+
                         dataList.Add(data);
                     }
                 } catch (Exception ex) {
@@ -445,11 +451,12 @@
                 try {
                     foreach (Data data in dataGrid1.ItemsSource) {
                         sw.WriteLine(String.Format(
-                            "{0}\t{1}\t{2}\t{3}",
+                            "{0}\t{1}\t{2}\t{3}\t{4}",
                             data.IsEnabled,
                             data.Type,
                             data.Length,
-                            data.Value));
+                            data.Value,
+                            data.Memo));
                     }
                 } catch (Exception ex) {
                     MessageBox.Show(ex.ToString(), "Exception",
@@ -519,20 +526,23 @@
         #endregion
 
         #region Context Menu
-        private void MenuItem_Add_Click(object sender, RoutedEventArgs e) {
+        private void DeleteData() {
             List<Data> newData = new List<Data>((List<Data>)dataGrid1.ItemsSource);
-            newData.Add(defaultData);
+            int j = 0;
+            for (int i = 0; i < dataGrid1.Items.Count; ++i) {
+                DataGridRow row = (DataGridRow)dataGrid1.ItemContainerGenerator.ContainerFromIndex(i);
+                if (row.IsSelected) {
+                    newData.RemoveAt(i - j);
+                    ++j;
+                }
+            }
             dataGrid1.ItemsSource = newData;
         }
 
-        private void MenuItem_Insert_Click(object sender, RoutedEventArgs e) {
-            List<Data> newData = new List<Data>((List<Data>)dataGrid1.ItemsSource);
-            int index = Math.Max(0, dataGrid1.SelectedIndex);
-            newData.Insert(index, defaultData);
-            dataGrid1.ItemsSource = newData;
-        }
-
-        private void MenuItem_Delete_Click(object sender, RoutedEventArgs e) {
+        /// <summary>
+        /// Deprecated
+        /// </summary>
+        private void DeleteSelectedData() {
             int index = dataGrid1.SelectedIndex;
             if (index < 0) { return; }
             List<Data> newData = new List<Data>((List<Data>)dataGrid1.ItemsSource);
@@ -541,8 +551,84 @@
             dataGrid1.ItemsSource = newData;
         }
 
+        private void CopyData() {
+            clipBoard.Clear();
+            foreach (Data data in dataGrid1.SelectedItems) {
+                clipBoard.Add(data);
+            }
+        }
+
+        private void PasteData() {
+            List<Data> newData = new List<Data>((List<Data>)dataGrid1.ItemsSource);
+            int index = Math.Max(0, dataGrid1.SelectedIndex);
+            foreach (Data data in clipBoard) {
+                newData.Insert(index, data);
+                ++index;
+            }
+            dataGrid1.ItemsSource = newData;
+        }
+
+        private void MenuItem_Add_Click(object sender, RoutedEventArgs e) {
+            List<Data> newData = new List<Data>((List<Data>)dataGrid1.ItemsSource);
+            newData.Add(new Data() {
+                IsEnabled = true,
+                Type = DataType.Int32,
+                Length = 1,
+                Value = "0"
+            });
+            dataGrid1.ItemsSource = newData;
+        }
+
+        private void MenuItem_Insert_Click(object sender, RoutedEventArgs e) {
+            List<Data> newData = new List<Data>((List<Data>)dataGrid1.ItemsSource);
+            int index = Math.Max(0, dataGrid1.SelectedIndex);
+            newData.Insert(index, new Data() {
+                IsEnabled = true,
+                Type = DataType.Int32,
+                Length = 1,
+                Value = "0"
+            });
+            dataGrid1.ItemsSource = newData;
+        }
+
+        private void MenuItem_Delete_Click(object sender, RoutedEventArgs e) {
+            DeleteData();
+        }
+
         private void MenuItem_DeleteAll_Click(object sender, RoutedEventArgs e) {
             dataGrid1.ItemsSource = new List<Data>();
+        }
+
+        private void MenuItem_Copy_Click(object sender, RoutedEventArgs e) {
+            CopyData();
+        }
+
+        private void MenuItem_Paste_Click(object sender, RoutedEventArgs e) {
+            PasteData();
+        }
+
+        private void MenuItem_Cut_Click(object sender, RoutedEventArgs e) {
+            CopyData();
+            DeleteData();
+        }
+        #endregion
+
+        #region Command
+        private void CutExecuted(object sender, ExecutedRoutedEventArgs e) {
+            CopyData();
+            DeleteData();
+        }
+
+        private void CopyExecuted(object sender, ExecutedRoutedEventArgs e) {
+            CopyData();
+        }
+
+        private void PasteExecuted(object sender, ExecutedRoutedEventArgs e) {
+            PasteData();
+        }
+
+        private void DelExecuted(object sender, ExecutedRoutedEventArgs e) {
+            DeleteData();
         }
         #endregion
     }

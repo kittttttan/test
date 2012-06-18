@@ -25,5 +25,6 @@
         public DataType Type { get; set; }
         public int Length { get; set; }
         public string Value { get; set; }
+        public string Memo { get; set; }
     }
 }
