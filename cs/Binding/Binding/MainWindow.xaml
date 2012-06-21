@@ -1,0 +1,25 @@
+﻿<Window x:Class="Binding.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Binding" Height="121" Width="197"
+        Loaded="ContentPanel_Loaded" Name="MyWindow">
+    <Grid x:Name="ContentPanel">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="23" />
+            <RowDefinition Height="61" />
+        </Grid.RowDefinitions>
+        <StackPanel Name="stackPanel1" Grid.Row="1">
+            <TextBlock Name="textBlock2" Text="{Binding Count, Mode=TwoWay}" ToolTip="Count" />
+            <Button Content="Click me" Name="button1" Click="button1_Click" ToolTip="Click to change text and menu item checked" />
+            <TextBlock Name="textBlock1" Text="{Binding Now, Mode=TwoWay}" ToolTip="Now" />
+        </StackPanel>
+        <Menu Height="23" Name="menu1" VerticalAlignment="Top">
+            <MenuItem Header="Check(_C)">
+                <MenuItem Header="Check1" IsCheckable="True"
+                          IsChecked="{Binding Check, Mode=TwoWay}" ToolTip="ContentPanel.DataContext" />
+                <MenuItem Header="Check2" IsCheckable="True"
+                          IsChecked="{Binding ElementName=MyWindow, Path=Checked, Mode=TwoWay}" ToolTip="DependencyProperty" />
+            </MenuItem>
+        </Menu>
+    </Grid>
+</Window>

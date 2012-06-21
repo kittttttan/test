@@ -9,7 +9,7 @@ typedef struct _Sample {
 } Sample;
 
 void writeStruct(const char* filename) {
-  Sample s = {7, L"奈々", 7.7};
+  Sample s = {7, L"奈々", 7.7f};
   FILE* fp;
   
   fp = fopen(filename, "wb");

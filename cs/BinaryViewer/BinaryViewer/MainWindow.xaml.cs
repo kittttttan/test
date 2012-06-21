@@ -14,10 +14,12 @@
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class MainWindow : Window {
+        #region Public
         public static RoutedCommand CutCommand = new RoutedCommand();
         public static RoutedCommand CopyCommand = new RoutedCommand();
         public static RoutedCommand PasteCommand = new RoutedCommand();
         public static RoutedCommand DelCommand = new RoutedCommand();
+        #endregion
 
         #region Private State
         private const char commentChar = '#';
