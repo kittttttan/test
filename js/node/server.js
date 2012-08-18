@@ -23,22 +23,23 @@ http.createServer(function(req, res) {
       res.end('Hello World\n');
     return;
   } else {
-    var reqUrl = req.url, body;
+    var reqUrl = require('url').parse(req.url), body;
     console.log(reqUrl);
-    if (reqUrl === '/') {
-      reqUrl = '/index.html';
+    var href = reqUrl.href;
+    if (!href || href === '/') {
+      href = '/index.html';
     }
 
-    var ext, dot = reqUrl.lastIndexOf('.');
+    var ext, dot = href.lastIndexOf('.');
     if (dot < 0) {
       ext = '.html';
-      reqUrl += ext;
+      href += ext;
     } else {
-      ext = reqUrl.substring(dot);
+      ext = href.substring(dot);
     }
     if (ext in MIME) {
       try {
-        body = fs.readFileSync(root + reqUrl);
+        body = fs.readFileSync(root + href);
         res.writeHead(200, {'content-type': MIME[ext], 'content-length': body.length});
         res.write(body);
         res.end();
