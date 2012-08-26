@@ -111,6 +111,25 @@ errno_t Lexer::lex() {
             }
 
             if (c == '+' || c == '-') {
+                if (status_ == WORD) {
+                    cur[length_] = '\0';
+                    ++length_;
+
+                    if (setLiteral(item.type, cur)) {
+                        err = 3;
+                        fprintf(stderr, "(%3d,%3d)undefined literal: %s\n",
+                            line_, pos_ - length_ + 1, cur);
+                        goto LEX_END;
+                    }
+                    //item.type = LITERAL;
+                    item.value = cur;
+                    item.line = line_;
+                    item.pos = pos_ - length_ + 1;
+                    items_.push_back(item);
+
+                    length_ = 0;
+                }
+
                 if (c == '+') {
                     item.type = PLUS;
                 } else if (c == '-') {
@@ -130,7 +149,8 @@ errno_t Lexer::lex() {
 
                     if (setLiteral(item.type, cur)) {
                         err = 3;
-                        fprintf(stderr, "undefined literal\n");
+                        fprintf(stderr, "(%3d,%3d)undefined literal: %s\n",
+                            line_, pos_ - length_ + 1, cur);
                         goto LEX_END;
                     }
                     //item.type = LITERAL;
@@ -168,7 +188,8 @@ errno_t Lexer::lex() {
 
                     if (setLiteral(item.type, cur)) {
                         err = 3;
-                        fprintf(stderr, "undefined literal\n");
+                        fprintf(stderr, "(%3d,%3d)undefined literal: %s\n",
+                            line_, pos_ - length_ + 1, cur);
                         goto LEX_END;
                     }
                     //item.type = LITERAL;
@@ -189,7 +210,8 @@ errno_t Lexer::lex() {
 
                     if (setLiteral(item.type, cur)) {
                         err = 3;
-                        fprintf(stderr, "undefined literal\n");
+                        fprintf(stderr, "(%3d,%3d)undefined literal: %s\n",
+                            line_, pos_ - length_ + 1, cur);
                         goto LEX_END;
                     }
                     item.value = cur;
@@ -207,7 +229,8 @@ errno_t Lexer::lex() {
 
                     if (setLiteral(item.type, cur)) {
                         err = 3;
-                        fprintf(stderr, "undefined literal\n");
+                        fprintf(stderr, "(%3d,%3d)undefined literal: %s\n",
+                            line_, pos_ - length_ + 1, cur);
                         goto LEX_END;
                     }
                     item.value = cur;

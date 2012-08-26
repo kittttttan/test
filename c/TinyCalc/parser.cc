@@ -2,8 +2,12 @@
 
 //#define _USE_MATH_DEFINES
 #include <cmath>
+#include <cstdio>
+#include <cstdlib>
 
 namespace tc {
+
+using namespace std;
 
 Parser::Parser(const std::vector<Lexer::Item>& items) :
     index_(0),

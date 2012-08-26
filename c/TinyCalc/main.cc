@@ -1,6 +1,7 @@
 #include "parser.h"
 
 #include <cstdio>
+#include <cstring>
 
 int main(int argc, char* argv[]) {
     using namespace tc;
@@ -14,7 +15,11 @@ int main(int argc, char* argv[]) {
             goto END;
         } else {
             FILE* fp;
+#ifdef _MSC_VER
             err = fopen_s(&fp, argv[i], "r");
+#else
+            fp = fopen(argv[i], "r");
+#endif
             if (err) {
                 fclose(fp);
                 fprintf(stderr, "failed open file: %s\n", argv[i]);
