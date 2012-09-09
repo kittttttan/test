@@ -30,7 +30,7 @@
             DataRowView drv = (DataRowView)dataGrid1.CurrentItem;
             try {
                 sqlCeConnection.Open();
-                var cmd = new SqlCeCommand("Select * from sample", sqlCeConnection);
+                var cmd = new SqlCeCommand("select * from sample", sqlCeConnection);
                 var da = new SqlCeDataAdapter(cmd);
                 var dt = new DataTable();
                 da.Fill(dt);
@@ -128,16 +128,16 @@
                 using (var file = new System.IO.StreamWriter(sfd.FileName)) {
                     try {
                         sqlCeConnection.Open();
-                        var cmd = new SqlCeCommand("Select * from sample", sqlCeConnection);
+                        var cmd = new SqlCeCommand("select * from sample", sqlCeConnection);
                         var reader = cmd.ExecuteReader();
                         cmd.Dispose();
 
                         while (reader.Read()) {
                             file.WriteLine(
-                                reader["ID"].ToString() + "," +
-                                reader["Title"].ToString() + "," +
-                                reader["PubDate"].ToString() + "," +
-                                reader["Price"].ToString());
+                                Escape.CSV(reader["ID"].ToString()) + "," +
+                                Escape.CSV(reader["Title"].ToString()) + "," +
+                                Escape.CSV(reader["PubDate"].ToString()) + "," +
+                                Escape.CSV(reader["Price"].ToString()));
                         }
 
                         reader.Close();
@@ -158,11 +158,10 @@
                 using (var file = new System.IO.StreamWriter(sfd.FileName)) {
                     try {
                         sqlCeConnection.Open();
-                        var cmd = new SqlCeCommand("Select * from sample", sqlCeConnection);
+                        var cmd = new SqlCeCommand("select * from sample", sqlCeConnection);
                         var reader = cmd.ExecuteReader();
                         cmd.Dispose();
 
-                        // TODO: HTML Escape
                         file.WriteLine("<!DOCTYPE html>");
                         file.WriteLine("<meta charset=\"UTF-8\">");
                         file.WriteLine("<title>" + sfd.FileName + "</title>");
@@ -172,10 +171,10 @@
                         file.WriteLine("<tbody>");
                         while (reader.Read()) {
                             file.WriteLine(
-                                "<tr><td>" + reader["ID"].ToString() +
-                                "<td>" + reader["Title"].ToString() +
-                                "<td>" + reader["PubDate"].ToString() +
-                                "<td>" + reader["Price"].ToString());
+                                "<tr><td>" + Escape.HTML(reader["ID"].ToString()) +
+                                "<td>" + Escape.HTML(reader["Title"].ToString()) +
+                                "<td>" + Escape.HTML(reader["PubDate"].ToString()) +
+                                "<td>" + Escape.HTML(reader["Price"].ToString()));
                         }
                         file.WriteLine("</table>");
 
