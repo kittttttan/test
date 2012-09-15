@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <algorithm>
 #include <vector>
-#include <initializer_list>
+//#include <initializer_list>
 #include <regex>
 #include <random>
 
@@ -47,7 +47,7 @@ struct Base {
     //Base() = default;
     //Base(const Base&) = delete;
     virtual void some_func(int);
-    //virtual void final_func() final;
+    virtual void final_func() final;
 };
 
 struct Derived : Base {
@@ -56,16 +56,16 @@ struct Derived : Base {
     //void final_func();
 };
 
-class InitList {
-public:
-    InitList() { }
-    InitList(std::initializer_list<int> list) {
-        std::for_each(list.begin(), list.end(), [](int n) { printf("%d\n", n); });
-    }
-};
-void func_init_list(std::initializer_list<int> list) {
-    std::for_each(list.begin(), list.end(), [](int n) { printf("%d\n", n); });
-}
+//class InitList {
+//public:
+//    InitList() { }
+//    InitList(std::initializer_list<int> list) {
+//        std::for_each(list.begin(), list.end(), [](int n) { printf("%d\n", n); });
+//    }
+//};
+//void func_init_list(std::initializer_list<int> list) {
+//    std::for_each(list.begin(), list.end(), [](int n) { printf("%d\n", n); });
+//}
 
 int main() {
     printf("** Rvalue references **\n");
@@ -126,7 +126,7 @@ int main() {
         }
     };
 
-    //Local lo{1};
+    Local lo = {1};
     //printf("sizeof(Local::value) = %d\n", sizeof(Local::value));
     const std::vector<Local> vec(1, Local());
     vec.front().print();
@@ -140,14 +140,14 @@ int main() {
         printf("%s\n", e.what());
     }
 
-    //printf("\n** Range-based for-loop **\n");
-    //int my_array[] = {0,1,2,3,4,5,6};
-    //for (int& x : my_array) {
-    //	++x;
-    //}
-    //for (int& x : my_array) {
-    //	printf("%d\n", x);
-    //}
+    printf("\n** Range-based for-loop **\n");
+    int my_array[] = {0,1,2,3,4,5,6};
+    for (int& x : my_array) {
+    	++x;
+    }
+    for (int& x : my_array) {
+    	printf("%d\n", x);
+    }
 
     //InitList list({1, 2, 3});
     //func_init_list({1,2,3});
