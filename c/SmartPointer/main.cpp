@@ -1,9 +1,8 @@
 #include <memory>
 
-#ifdef _DEBUG
+#ifdef _MSC_VER
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
-#define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
 #endif
 
 struct S {
@@ -12,8 +11,8 @@ struct S {
 
 typedef std::tr1::shared_ptr<S> S_Ptr;
 
-int main(int argc, char** argv) {
-#ifdef _DEBUG
+int main(int argc, char* argv[]) {
+#ifdef _MSC_VER
     _CrtSetDbgFlag(_CRTDBG_LEAK_CHECK_DF | _CRTDBG_ALLOC_MEM_DF);
 #endif
 
