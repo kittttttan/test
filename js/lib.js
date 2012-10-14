@@ -1,24 +1,4 @@
 /**
- * Standard output
- * @param {string} s Output message
- */
-function stdout(s) {
-  if (typeof window !== 'undefined'
-      && typeof window.document !== 'undefined') {
-    document.writeln(s);
-  }
-  else if (typeof WScript !== 'undefined') {
-    WScript.echo(s);
-  }
-  else if (typeof console !== 'undefined') {
-    console.log(s);
-  }
-  else if (typeof print !== 'undefined') {
-    print(s);
-  }
-}
-
-/**
  * @param {boolean} b
  * @param {string} s
  * @see stdout

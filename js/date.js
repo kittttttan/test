@@ -73,7 +73,7 @@ function dateFormat(s, d) {
       .replace(/s/g, function() { return d.getSeconds(); })
       .replace(/S+/g, function() { return d.getMilliseconds(); })
       .replace(/Z+/g, function() {
-        var t = d.getTimezoneOffset(), z = t / 60, s;
+        var t = d.getTimezoneOffset(), z = -t / 60, s;
         if (z < 0) {
           s = '-' + ('0' + (-z)).slice(-2);
         } else {
@@ -94,4 +94,11 @@ function dateFormat(s, d) {
         }
       })
       ;
+}
+
+// exports for node
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+  module.exports.isLeapYear = isLeapYear;
+  module.exports.getDaysInMonth = getDaysInMonth;
+  module.exports.dateFormat = dateFormat;
 }
