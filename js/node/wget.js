@@ -10,7 +10,7 @@ function wget(targetUrl, opt) {
     host: target.hostname,
     port: target.port,
     path: target.pathname + (target.search || ''),
-    method: opt.method,
+    method: opt.method
   });
   console.log(req.method +' '+ targetUrl);
   

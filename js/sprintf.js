@@ -7,7 +7,7 @@ function sprintf(str) {
   var argv = arguments,
       index = 1;
   return str.replace(
-    /%([-+#0])?(\d+)?(?:\.(\d+))?([%defoxs])/g,
+    /%([+\-#0])?(\d+)?(?:\.(\d+))?([%defoxs])/g,
     function(src, flag, width, prec, type) {
       if (type === '%') { return '%'; }
       var s = '', n = 0;

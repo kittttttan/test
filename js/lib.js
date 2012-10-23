@@ -34,14 +34,14 @@ function loadScript(src, opt_callback) {
       done = false;
   script.setAttribute('src', src);
   script.onload = script.onreadstatechange = function() {
-    if (!done && (!this.readyState || this.readyState === 'loaded'
-        || this.readyState === 'complete')) {
+    if (!done && (!this.readyState || this.readyState === 'loaded' ||
+        this.readyState === 'complete')) {
       done = true;
       script.onload = script.onreadystatechange = null;
       if (opt_callback) {
         opt_callback();
       }
     }
-  }
+  };
   head.insertBefore(script, head.firstChild);
 }

@@ -28,7 +28,7 @@ var http = require('http'),
  * @param {string} str
  */
 function logging(str) {
-  str = dateUtil.dateFormat('yyyy-MM-dd HH:mm:ss Z', new Date) + ' ' + str;
+  str = dateUtil.dateFormat('yyyy-MM-dd HH:mm:ss Z', new Date()) + ' ' + str;
   console.log(str);
   fs.appendFile('node.log', str + '\n', function (err) {
     if (err) throw err;
@@ -99,8 +99,8 @@ http.createServer(function(req, res) {
   if (req.method === 'POST') {
     var data = '';
     req.on('data', function(chunk) {
-  		data += chunk;
-  	});
+      data += chunk;
+    });
     req.on('end', function() {
       proc(req, res, qs.parse(data));
     });

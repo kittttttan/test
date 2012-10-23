@@ -142,7 +142,7 @@ function unique(a) {
  * @param {number} opt_step
  */
 function range(start, opt_last, opt_step) {
-  var a = [];
+  var a = [], i;
   if (arguments.length === 1) {
     opt_last = start;
     start = 0;
@@ -150,13 +150,13 @@ function range(start, opt_last, opt_step) {
   if (start > opt_last) {
     if (opt_step > 0) { return a; }
     if (!opt_step) { step = -1; }
-    for (var i = start; i > opt_last; i += opt_step) {
+    for (i = start; i > opt_last; i += opt_step) {
       a.push(i);
     }
   } else {
     if (opt_step < 0) { return a; }
     if (!opt_step) { opt_step = 1; }
-    for (var i = start; i < opt_last; i += opt_step) {
+    for (i = start; i < opt_last; i += opt_step) {
       a.push(i);
     }
   }

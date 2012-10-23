@@ -51,7 +51,7 @@ function nobr(s) {
 }
 
 // RegExp snippets
-var regURI = /\w+:\/\/[\w-.\/?%&=:@;]*/g;
+var regURI = /\w+:\/\/[\w\-.\/?%&=:@;]*/g;
 var regXMLTag = /<\/?\w+[^>]*>/g;
 var regCComment = /\/\*[\s\S]*?\*\//gm;
 var regLineComment = /\/\/.*$/gm;
@@ -62,18 +62,18 @@ var regDoubleQuote = /"([^\\"\n]|\\.)*"/g; // "
  * @param {number} opt_filter
  */
 function genRandomString(len, opt_filter) {
-	var str = '',
-	    letter = '';
-	if (!(opt_filter & 1)) letter += 'abcdefghijklmnopqrstuvwxyz';
-	if (!((opt_filter >> 1) & 1)) letter += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-	if (!((opt_filter >> 2) & 1)) letter += '0123456789';
-	if (!((opt_filter >> 3) & 1)) letter += '_';
-	if (!((opt_filter >> 4) & 1)) letter += '!\"#$%&\'()=~|-^\@[;:],./`{+*}>?';
-	if (!((opt_filter >> 5) & 1)) letter += '(`~!@#$%^&*()_+-={}|[]\\:\";\'<>?,./)';
+  var str = '',
+      letter = '';
+  if (!(opt_filter & 1)) letter += 'abcdefghijklmnopqrstuvwxyz';
+  if (!((opt_filter >> 1) & 1)) letter += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (!((opt_filter >> 2) & 1)) letter += '0123456789';
+  if (!((opt_filter >> 3) & 1)) letter += '_';
+  if (!((opt_filter >> 4) & 1)) letter += '!\"#$%&\'()=~|-^@[;:],./`{+*}>?';
+  if (!((opt_filter >> 5) & 1)) letter += '(`~!@#$%^&*()_+-={}|[]\\:\";\'<>?,./)';
 
-	for (var i = 0, range = letter.length + 1; i < len; ++i) {
-		str += letter.charAt(Math.random() * range | 0);
-	}
+  for (var i = 0, range = letter.length + 1; i < len; ++i) {
+    str += letter.charAt(Math.random() * range | 0);
+  }
 
-	return str;
-};
+  return str;
+}
