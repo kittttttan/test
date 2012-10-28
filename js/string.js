@@ -50,6 +50,26 @@ function nobr(s) {
   return s.replace(/[\r\n]+/g, '');
 }
 
+/**
+ * @param {string} src
+ * @param {string} suffix
+ * @return {boolean}
+ */
+function startsWith(src, suffix) {
+  return !src.indexOf(suffix);
+}
+
+/**
+ * @param {string} src
+ * @param {string} suffix
+ * @return {boolean}
+ */
+function endsWith(src, suffix) {
+  var len = str.length;
+  if (src.length < len) return false;
+  return src.slice(-len) === str;
+}
+
 // RegExp snippets
 var regURI = /\w+:\/\/[\w\-.\/?%&=:@;]*/g;
 var regXMLTag = /<\/?\w+[^>]*>/g;
@@ -76,4 +96,17 @@ function genRandomString(len, opt_filter) {
   }
 
   return str;
+}
+
+// exports for node
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+  module.exports.escapeHTML = escapeHTML;
+  module.exports.escapeJS = escapeJS;
+  module.exports.trimLeft = trimLeft;
+  module.exports.trimRight = trimRight;
+  module.exports.trim = trim;
+  module.exports.nobr = nobr;
+  module.exports.startsWith = startsWith;
+  module.exports.endsWith = endsWith;
+  module.exports.genRandomString = genRandomString;
 }

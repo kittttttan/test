@@ -16,3 +16,6 @@ bin/
 obj/
 Debug/
 Release/
+
+ts/*.js
+ts/test/*.js

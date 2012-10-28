@@ -163,3 +163,19 @@ function range(start, opt_last, opt_step) {
   
   return a;
 }
+
+// exports for node
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+  module.exports.isArray = isArray;
+  module.exports.some = some;
+  module.exports.every = every;
+  module.exports.filter = filter;
+  module.exports.forEach = forEach;
+  module.exports.map = map;
+  module.exports.reduce = reduce;
+  module.exports.reduceRight = reduceRight;
+  module.exports.sum = sum;
+  module.exports.average = average;
+  module.exports.unique = unique;
+  module.exports.range = range;
+}

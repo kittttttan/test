@@ -126,3 +126,13 @@ function proper(str) {
     return a.charAt(0).toUpperCase() + a.substring(1).toLowerCase();
   });
 }
+
+// exports for node
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+  module.exports.strConv = strConv;
+  module.exports.toZenkaku = toZenkaku;
+  module.exports.toZenkakuKatakana = toZenkakuKatakana;
+  module.exports.toKatakana = toKatakana;
+  module.exports.toHiragana = toHiragana;
+  module.exports.proper = proper;
+}

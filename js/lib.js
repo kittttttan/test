@@ -12,7 +12,6 @@ function assert(b, s) {
  * @param {function} f
  * @param {number=} opt_ms Interval. default is 1000.
  */
- 
 function bench(f, opt_ms) {
 	var b = Date.now(),
       i = 0;
@@ -44,4 +43,10 @@ function loadScript(src, opt_callback) {
     }
   };
   head.insertBefore(script, head.firstChild);
+}
+
+// exports for node
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+  module.exports.assert = assert;
+  module.exports.bench = bench;
 }
