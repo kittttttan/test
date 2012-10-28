@@ -65,9 +65,9 @@ function startsWith(src, suffix) {
  * @return {boolean}
  */
 function endsWith(src, suffix) {
-  var len = str.length;
+  var len = suffix.length;
   if (src.length < len) return false;
-  return src.slice(-len) === str;
+  return src.slice(-len) === suffix;
 }
 
 // RegExp snippets

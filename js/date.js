@@ -31,7 +31,7 @@ function getDaysInMonth(y, m) {
  */
 function dateFormat(s, d) {
   return s
-      .replace(/yyyy/g, function() { return d.getFullYear(); })
+      .replace(/yyyy/g, function() { return d.getFullYear()+''; })
       .replace(/yy/g, function() { return (d.getFullYear() + '').substring(2, 4); })
       .replace(/M{3,}/g, function() {
         switch(d.getMonth()) {
@@ -51,27 +51,27 @@ function dateFormat(s, d) {
         }
       })
       .replace(/MM/g, function() { return ('0' + (d.getMonth() + 1)).slice(-2); })
-      .replace(/M/g, function() { return d.getMonth() + 1; })
+      .replace(/M/g, function() { return (d.getMonth() + 1)+''; })
       .replace(/dd/g, function() { return ('0' + d.getDate()).slice(-2); })
-      .replace(/d/g, function() { return d.getDate(); })
+      .replace(/d/g, function() { return d.getDate()+''; })
       .replace(/HH/g, function() { return ('0' + d.getHours()).slice(-2); })
-      .replace(/H/g, function() { return d.getHours(); })
+      .replace(/H/g, function() { return d.getHours()+''; })
       .replace(/hh/g, function() {
         var h = d.getHours();
         if (h > 12) { h -= 12; }
-        return !h ? 12 : ('0' + h).slice(-2);
+        return !h ? '12' : ('0' + h).slice(-2);
       })
       .replace(/h/g, function() {
         var h = d.getHours();
         if (h > 12) { h -= 12; }
-        return !h ? 12 : h;
+        return !h ? '12' : h+'';
       })
       .replace(/a/g, function() { return d.getHours() < 12 ? 'AM' : 'PM'; })
       .replace(/mm/g, function() { return ('0' + d.getMinutes()).slice(-2); })
-      .replace(/m/g, function() { return d.getMinutes(); })
+      .replace(/m/g, function() { return d.getMinutes()+''; })
       .replace(/ss/g, function() { return ('0' + d.getSeconds()).slice(-2); })
-      .replace(/s/g, function() { return d.getSeconds(); })
-      .replace(/S+/g, function() { return d.getMilliseconds(); })
+      .replace(/s/g, function() { return d.getSeconds()+''; })
+      .replace(/S+/g, function() { return d.getMilliseconds()+''; })
       .replace(/Z+/g, function() {
         var t = d.getTimezoneOffset(), z = -t / 60, s;
         if (z < 0) {
