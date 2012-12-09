@@ -13,6 +13,14 @@ if (typeof require != 'undefined') {
   dateFormat = date.dateFormat;
 }
 
+if (typeof console == 'undefined') {
+  console={
+    log: function(a){
+      document.writeln(a);
+    }
+  };
+}
+
 function sprintfTest() {
   console.log('Test sprintf ...');
   console.log(

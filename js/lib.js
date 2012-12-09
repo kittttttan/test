@@ -46,7 +46,7 @@ function loadScript(src, opt_callback) {
 }
 
 // exports for node
-if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-  module.exports.assert = assert;
-  module.exports.bench = bench;
+if (typeof exports !== 'undefined') {
+  exports.assert = assert;
+  exports.bench = bench;
 }

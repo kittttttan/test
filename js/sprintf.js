@@ -67,7 +67,7 @@ function repeatString(str, repeat) {
 }
 
 // exports for node
-if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-  module.exports.sprintf = sprintf;
-  module.exports.repeatString = repeatString;
+if (typeof exports !== 'undefined') {
+  exports.sprintf = sprintf;
+  exports.repeatString = repeatString;
 }

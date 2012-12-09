@@ -165,17 +165,17 @@ function range(start, opt_last, opt_step) {
 }
 
 // exports for node
-if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-  module.exports.isArray = isArray;
-  module.exports.some = some;
-  module.exports.every = every;
-  module.exports.filter = filter;
-  module.exports.forEach = forEach;
-  module.exports.map = map;
-  module.exports.reduce = reduce;
-  module.exports.reduceRight = reduceRight;
-  module.exports.sum = sum;
-  module.exports.average = average;
-  module.exports.unique = unique;
-  module.exports.range = range;
+if (typeof exports !== 'undefined') {
+  exports.isArray = isArray;
+  exports.some = some;
+  exports.every = every;
+  exports.filter = filter;
+  exports.forEach = forEach;
+  exports.map = map;
+  exports.reduce = reduce;
+  exports.reduceRight = reduceRight;
+  exports.sum = sum;
+  exports.average = average;
+  exports.unique = unique;
+  exports.range = range;
 }

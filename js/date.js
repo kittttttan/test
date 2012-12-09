@@ -97,8 +97,8 @@ function dateFormat(s, d) {
 }
 
 // exports for node
-if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-  module.exports.isLeapYear = isLeapYear;
-  module.exports.getDaysInMonth = getDaysInMonth;
-  module.exports.dateFormat = dateFormat;
+if (typeof exports !== 'undefined') {
+  exports.isLeapYear = isLeapYear;
+  exports.getDaysInMonth = getDaysInMonth;
+  exports.dateFormat = dateFormat;
 }

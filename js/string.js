@@ -99,14 +99,14 @@ function genRandomString(len, opt_filter) {
 }
 
 // exports for node
-if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-  module.exports.escapeHTML = escapeHTML;
-  module.exports.escapeJS = escapeJS;
-  module.exports.trimLeft = trimLeft;
-  module.exports.trimRight = trimRight;
-  module.exports.trim = trim;
-  module.exports.nobr = nobr;
-  module.exports.startsWith = startsWith;
-  module.exports.endsWith = endsWith;
-  module.exports.genRandomString = genRandomString;
+if (typeof exports !== 'undefined') {
+  exports.escapeHTML = escapeHTML;
+  exports.escapeJS = escapeJS;
+  exports.trimLeft = trimLeft;
+  exports.trimRight = trimRight;
+  exports.trim = trim;
+  exports.nobr = nobr;
+  exports.startsWith = startsWith;
+  exports.endsWith = endsWith;
+  exports.genRandomString = genRandomString;
 }

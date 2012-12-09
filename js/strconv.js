@@ -128,11 +128,11 @@ function proper(str) {
 }
 
 // exports for node
-if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-  module.exports.strConv = strConv;
-  module.exports.toZenkaku = toZenkaku;
-  module.exports.toZenkakuKatakana = toZenkakuKatakana;
-  module.exports.toKatakana = toKatakana;
-  module.exports.toHiragana = toHiragana;
-  module.exports.proper = proper;
+if (typeof exports !== 'undefined') {
+  exports.strConv = strConv;
+  exports.toZenkaku = toZenkaku;
+  exports.toZenkakuKatakana = toZenkakuKatakana;
+  exports.toKatakana = toKatakana;
+  exports.toHiragana = toHiragana;
+  exports.proper = proper;
 }
