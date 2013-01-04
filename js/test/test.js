@@ -1,5 +1,6 @@
 if (typeof require != 'undefined') {
-  require('../lib.js');
+  var lib = require('../lib.js');
+  assert = lib.assert;
   var sp = require('../sprintf.js');
   sprintf = sp.sprintf;
   var array = require('../array.js');
@@ -87,3 +88,4 @@ function mainTest() {
 }
 
 mainTest();
+//assert(false, 'assert test');
