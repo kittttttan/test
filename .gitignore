@@ -11,6 +11,7 @@
 *.sdf
 *.user
 *.filters
+*.log
 
 bin/
 obj/
@@ -19,3 +20,5 @@ Release/
 
 ts/*.js
 ts/test/*.js
+
+java/ktn/bin/
