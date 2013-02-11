@@ -10,7 +10,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
 import java.util.logging.Logger;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
 public class LifeCells {
     private static Logger logger = Logger.getLogger(LifeCells.class.getName());
@@ -69,7 +76,7 @@ public class LifeCells {
         } catch (IOException e) {
             logger.severe(e.getMessage());
         }
-        
+
         return res;
     }
 
@@ -77,7 +84,7 @@ public class LifeCells {
         boolean res = false;
         assert file != null : "file is null";
         logger.info(file.getPath());
-        
+
         try (FileOutputStream fos = new FileOutputStream(file);
                 OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
                 BufferedWriter bw = new BufferedWriter(osw)) {
@@ -98,6 +105,36 @@ public class LifeCells {
         } catch (IOException e) {
             logger.severe(e.getMessage());
         }
+
+        return res;
+    }
+
+    public boolean saveAsExcel(File file) {
+        boolean res = false;
+        assert file != null : "file is null";
+        logger.info(file.getPath());
+
+        Workbook wb = new HSSFWorkbook();
+        Sheet sheet = wb.createSheet();
+        for (int i = 0; i < height; ++i) {
+            Row row = sheet.createRow(i);
+            for (int j = 0; j < width; ++j) {
+                Cell cell = row.createCell(j);
+                if (cells[i][j] > 0) {
+                    cell.setCellValue("O");
+                } else {
+                    cell.setCellValue(".");
+                }
+            }
+        }
+        
+        try (FileOutputStream out = new FileOutputStream(file)) {
+            wb.write(out);
+        } catch (FileNotFoundException e) {
+            logger.severe(e.getMessage());
+        } catch (IOException e) {
+            logger.severe(e.getMessage());
+        }
         
         return res;
     }
@@ -106,10 +143,8 @@ public class LifeCells {
         generation = 0;
 
         for (int i = 0; i < height; ++i) {
-            for (int j = 0; j < width; ++j) {
-                cells[i][j] = 0;
-                temp[i][j] = 0;
-            }
+            Arrays.fill(cells[i], 0);
+            Arrays.fill(temp[i], 0);
         }
     }
 
@@ -126,12 +161,6 @@ public class LifeCells {
             if (i < height) {
                 for (int j = 0; j < w; ++j) {
                     newCells[i][j] = j < width ? cells[i][j] : 0;
-                    temp[i][j] = 0;
-                }
-            } else {
-                for (int j = 0; j < w; ++j) {
-                    newCells[i][j] = 0;
-                    temp[i][j] = 0;
                 }
             }
         }

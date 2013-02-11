@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 
 import ktn.gui.RadioMenu;
 import java.awt.event.InputEvent;
+import java.io.File;
 
 public class LifeFrame extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -125,15 +126,25 @@ public class LifeFrame extends JFrame {
                 }
                 
                 JFileChooser filechooser = new JFileChooser();
-                FileFilter filter = new FileNameExtensionFilter("Text", "txt");
-                filechooser.addChoosableFileFilter(filter);
-                filechooser.setFileFilter(filter);
+                FileFilter filterExcel = new FileNameExtensionFilter("Excel (*.xls)", "xls");
+                FileFilter filterText = new FileNameExtensionFilter("Text (*.txt)", "txt");
+                filechooser.addChoosableFileFilter(filterExcel);
+                filechooser.addChoosableFileFilter(filterText);
+                filechooser.setFileFilter(filterText);
                 
                 int selected = filechooser.showSaveDialog(contentPane);
                 switch (selected) {
                 case JFileChooser.APPROVE_OPTION:
-                    logger.info("TODO: save");
-                    if (!contentPane.getCells().save(filechooser.getSelectedFile())) {
+                    File file = filechooser.getSelectedFile();
+                    FileFilter ff = filechooser.getFileFilter();
+                    boolean done = false;
+                    if (ff.equals(filterExcel)) {
+                    //if (file.getName().toLowerCase().endsWith(".xls")) {
+                        done = contentPane.getCells().saveAsExcel(file);
+                    } else {
+                        done = contentPane.getCells().save(file);
+                    }
+                    if (!done) {
                         logger.warning("failed save");
                     }
                     break;
