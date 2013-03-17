@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\divs.c" />
+    <ClCompile Include="..\src\gcd.c" />
+    <ClCompile Include="..\src\palindrome.c" />
+    <ClCompile Include="..\src\pe.c" />
+    <ClCompile Include="..\src\pe1.c" />
+    <ClCompile Include="..\src\pe10.c" />
+    <ClCompile Include="..\src\pe11.c" />
+    <ClCompile Include="..\src\pe12.c" />
+    <ClCompile Include="..\src\pe13.c" />
+    <ClCompile Include="..\src\pe14.c" />
+    <ClCompile Include="..\src\pe15.c" />
+    <ClCompile Include="..\src\pe16.c" />
+    <ClCompile Include="..\src\pe17.c" />
+    <ClCompile Include="..\src\pe18.c" />
+    <ClCompile Include="..\src\pe19.c" />
+    <ClCompile Include="..\src\pe2.c" />
+    <ClCompile Include="..\src\pe20.c" />
+    <ClCompile Include="..\src\pe21.c" />
+    <ClCompile Include="..\src\pe22.c" />
+    <ClCompile Include="..\src\pe3.c" />
+    <ClCompile Include="..\src\pe4.c" />
+    <ClCompile Include="..\src\pe5.c" />
+    <ClCompile Include="..\src\pe6.c" />
+    <ClCompile Include="..\src\pe7.c" />
+    <ClCompile Include="..\src\pe8.c" />
+    <ClCompile Include="..\src\pe9.c" />
+    <ClCompile Include="..\src\prime.c" />
+    <ClCompile Include="..\src\spd.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\divs.h" />
+    <ClInclude Include="..\include\gcd.h" />
+    <ClInclude Include="..\include\palindrome.h" />
+    <ClInclude Include="..\include\pe1.h" />
+    <ClInclude Include="..\include\pe10.h" />
+    <ClInclude Include="..\include\pe11.h" />
+    <ClInclude Include="..\include\pe12.h" />
+    <ClInclude Include="..\include\pe13.h" />
+    <ClInclude Include="..\include\pe14.h" />
+    <ClInclude Include="..\include\pe15.h" />
+    <ClInclude Include="..\include\pe16.h" />
+    <ClInclude Include="..\include\pe17.h" />
+    <ClInclude Include="..\include\pe18.h" />
+    <ClInclude Include="..\include\pe19.h" />
+    <ClInclude Include="..\include\pe2.h" />
+    <ClInclude Include="..\include\pe20.h" />
+    <ClInclude Include="..\include\pe21.h" />
+    <ClInclude Include="..\include\pe22.h" />
+    <ClInclude Include="..\include\pe3.h" />
+    <ClInclude Include="..\include\pe4.h" />
+    <ClInclude Include="..\include\pe5.h" />
+    <ClInclude Include="..\include\pe6.h" />
+    <ClInclude Include="..\include\pe7.h" />
+    <ClInclude Include="..\include\pe8.h" />
+    <ClInclude Include="..\include\pe9.h" />
+    <ClInclude Include="..\include\prime.h" />
+    <ClInclude Include="..\include\spd.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7366250A-EE3A-4A6C-866F-B8AD7ECEFC40}</ProjectGuid>
+    <RootNamespace>ProjectEuler</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>..\include;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);</IncludePath>
+    <OutDir>$(SolutionDir)</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>..\include;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);</IncludePath>
+    <OutDir>$(SolutionDir)</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,7 +1,9 @@
 TARGET = TinyCalc
-CFLAGS	= -g -Wall -Derrno_t=int
 CXX = g++
-OBJS = main.o lexer.o parser.o
+CFLAGS= -g -Wall -Wextra -Derrno_t=int
+OBJDIR = obj/
+SOURCES = $(wildcard *.cc)
+OBJS = $(addprefix $(OBJDIR), $(SOURCES:%.cc=%.o))
 
 all: $(TARGET)
 
@@ -11,9 +13,10 @@ clean:
 $(TARGET): $(OBJS)
 	$(CXX) -o $@ $(OBJS)
 
-.cc.o:
-	$(CXX) $(CFLAGS) -c $<
+$(OBJDIR)%.o: %.cc
+	$(CC) $(CFLAGS) -c -o $@ $<
 
-main.o:
-lexer.o:
-parser.o:
+$(OBJS): | $(OBJDIR)
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)

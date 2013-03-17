@@ -1,4 +1,20 @@
 /**
+ * repeat string
+ * @param {string} str
+ * @param {number} repeat
+ * @return {string}
+ */
+function repeatString(str, repeat) {
+  var result = '';
+  for (; repeat > 0; repeat >>= 1, str += str) {
+    if (repeat & 1) {
+      result += str;
+    }
+  }
+  return result;
+}
+
+/**
  * @param {string} s
  * @return {string}
  */
@@ -100,6 +116,7 @@ function genRandomString(len, opt_filter) {
 
 // exports for node
 if (typeof exports !== 'undefined') {
+  exports.repeatString = repeatString;
   exports.escapeHTML = escapeHTML;
   exports.escapeJS = escapeJS;
   exports.trimLeft = trimLeft;

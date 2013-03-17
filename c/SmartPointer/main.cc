@@ -1,8 +1,9 @@
-#include <memory>
-
 #ifdef _MSC_VER
+#include <memory>
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
+#else
+#include <tr1/memory>
 #endif
 
 struct S {

@@ -16,7 +16,7 @@ function assert(b, s) {
  * @param {number=} [opt_ms=1000] Interval
  */
 function bench(f, opt_ms) {
-	var b = Date.now(),
+  var b = Date.now(),
       i = 0;
   if (!opt_ms) { opt_ms = 1000; }
   for (; Date.now() - b < opt_ms; ++i) {

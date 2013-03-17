@@ -8,10 +8,12 @@
 *.o
 *.exe
 *.ipch
+*.ilk
 *.sdf
 *.user
 *.filters
 *.log
+*.class
 
 bin/
 obj/

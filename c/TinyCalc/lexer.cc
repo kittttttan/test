@@ -7,9 +7,7 @@
 
 namespace tc {
 
-namespace {
-    const int MAX_VALUE_CHAR_LENGTH = 256;
-}
+static const size_t MAX_VALUE_CHAR_LENGTH = 256;
 
 const char* Lexer::typeNames[] = {
     "Integer",
@@ -62,11 +60,13 @@ Lexer::Lexer(const char* src) :
     err_ = lex();
 }
 
-Lexer::~Lexer() {
+Lexer::~Lexer()
+{
 
 }
 
-errno_t Lexer::lex() {
+errno_t Lexer::lex()
+{
     errno_t err = 0;
     int c;
     char cur[MAX_VALUE_CHAR_LENGTH];
@@ -265,39 +265,41 @@ LEX_END:
     return err;
 }
 
-errno_t Lexer::setLiteral(Type& type, const char* lit) {
+errno_t Lexer::setLiteral(Type& type, const char* lit)
+{
     errno_t err = 0;
-    if (strcmp(lit, "pi") == 0) {
+
+    if (!strcmp(lit, "pi")) {
         type = PI;
-    } else if (strcmp(lit, "e") == 0) {
+    } else if (!strcmp(lit, "e")) {
         type = E;
-    } else if (strcmp(lit, "abs") == 0) {
+    } else if (!strcmp(lit, "abs")) {
         type = ABS;
-    } else if (strcmp(lit, "sqrt") == 0) {
+    } else if (!strcmp(lit, "sqrt")) {
         type = SQRT;
-    } else if (strcmp(lit, "sin") == 0) {
+    } else if (!strcmp(lit, "sin")) {
         type = SIN;
-    } else if (strcmp(lit, "cos") == 0) {
+    } else if (!strcmp(lit, "cos")) {
         type = COS;
-    } else if (strcmp(lit, "tan") == 0) {
+    } else if (!strcmp(lit, "tan")) {
         type = TAN;
-    } else if (strcmp(lit, "asin") == 0) {
+    } else if (!strcmp(lit, "asin")) {
         type = ASIN;
-    } else if (strcmp(lit, "acos") == 0) {
+    } else if (!strcmp(lit, "acos")) {
         type = ACOS;
-    } else if (strcmp(lit, "atan") == 0) {
+    } else if (!strcmp(lit, "atan")) {
         type = ATAN;
-    } else if (strcmp(lit, "sinh") == 0) {
+    } else if (!strcmp(lit, "sinh")) {
         type = SINH;
-    } else if (strcmp(lit, "cosh") == 0) {
+    } else if (!strcmp(lit, "cosh")) {
         type = COSH;
-    } else if (strcmp(lit, "tanh") == 0) {
+    } else if (!strcmp(lit, "tanh")) {
         type = TANH;
-    } else if (strcmp(lit, "log") == 0) {
+    } else if (!strcmp(lit, "log")) {
         type = LOG;
-    } else if (strcmp(lit, "log10") == 0) {
+    } else if (!strcmp(lit, "log10")) {
         type = LOG10;
-    } else if (strcmp(lit, "exp") == 0) {
+    } else if (!strcmp(lit, "exp")) {
         type = EXP;
     } else {
         err = 1;
@@ -306,7 +308,8 @@ errno_t Lexer::setLiteral(Type& type, const char* lit) {
     return err;
 }
 
-void Lexer::print() {
+void Lexer::print()
+{
     for (std::vector<Item>::iterator it = items_.begin();
             it != items_.end(); ++it) {
         printf("(%3d,%3d)%7s: %s\n",

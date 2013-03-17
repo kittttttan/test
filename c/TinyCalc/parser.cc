@@ -17,11 +17,13 @@ Parser::Parser(const std::vector<Lexer::Item>& items) :
     items_ = items;
 }
 
-Parser::~Parser() {
+Parser::~Parser()
+{
 
 }
 
-errno_t Parser::parse() {
+errno_t Parser::parse()
+{
     err_ = 0;
     index_ = 0;
     value_ = expression();
@@ -35,9 +37,11 @@ errno_t Parser::parse() {
     return err_;
 }
 
-double Parser::number() {
+double Parser::number()
+{
     double res = 0.0;
     bool sign = true;
+
     for (;;) {
         if (items_[index_].type == Lexer::END) {
             err_ = 4;
@@ -53,16 +57,23 @@ double Parser::number() {
         }
     }
 
-    if (items_[index_].type == Lexer::INTEGER) {
-        long n = atol(items_[index_].value.c_str());
-        res = static_cast<double>(n);
-    } else if (items_[index_].type == Lexer::DECIMAL) {
+    switch (items_[index_].type) {
+    case Lexer::INTEGER:
+        {
+            long n = atol(items_[index_].value.c_str());
+            res = static_cast<double>(n);
+        }
+        break;
+    case Lexer::DECIMAL:
         res = atof(items_[index_].value.c_str());
-    } else if (items_[index_].type == Lexer::PI) {
+        break;
+    case  Lexer::PI:
         res = M_PI;
-    } else if (items_[index_].type == Lexer::E) {
+        break;
+    case Lexer::E:
         res = M_E;
-    } else {
+        break;
+    default:
         fprintf(stderr, "invalid number\n");
         err_ = 4;
         return res;
@@ -81,50 +92,69 @@ double Parser::number() {
     return res;
 }
 
-double Parser::factor() {
+double Parser::factor()
+{
     int func = 0;
-    if (items_[index_].type == Lexer::ABS) {
+
+    switch (items_[index_].type) {
+    case Lexer::ABS:
         func = Lexer::ABS;
         ++index_;
-    } else if (items_[index_].type == Lexer::SQRT) {
+        break;
+    case Lexer::SQRT:
         func = Lexer::SQRT;
         ++index_;
-    } else if (items_[index_].type == Lexer::SIN) {
+        break;
+    case Lexer::SIN:
         func = Lexer::SIN;
         ++index_;
-    } else if (items_[index_].type == Lexer::COS) {
+        break;
+    case Lexer::COS:
         func = Lexer::COS;
         ++index_;
-    } else if (items_[index_].type == Lexer::TAN) {
+        break;
+    case Lexer::TAN:
         func = Lexer::TAN;
         ++index_;
-    } else if (items_[index_].type == Lexer::ASIN) {
+        break;
+    case Lexer::ASIN:
         func = Lexer::ASIN;
         ++index_;
-    } else if (items_[index_].type == Lexer::ACOS) {
+        break;
+    case Lexer::ACOS:
         func = Lexer::ACOS;
         ++index_;
-    } else if (items_[index_].type == Lexer::ATAN) {
+        break;
+    case Lexer::ATAN:
         func = Lexer::ATAN;
         ++index_;
-    } else if (items_[index_].type == Lexer::SINH) {
+        break;
+    case Lexer::SINH:
         func = Lexer::SINH;
         ++index_;
-    } else if (items_[index_].type == Lexer::COSH) {
+        break;
+    case Lexer::COSH:
         func = Lexer::COSH;
         ++index_;
-    } else if (items_[index_].type == Lexer::TANH) {
+        break;
+    case Lexer::TANH:
         func = Lexer::TANH;
         ++index_;
-    } else if (items_[index_].type == Lexer::LOG) {
+        break;
+    case Lexer::LOG:
         func = Lexer::LOG;
         ++index_;
-    } else if (items_[index_].type == Lexer::LOG10) {
+        break;
+    case Lexer::LOG10:
         func = Lexer::LOG10;
         ++index_;
-    } else if (items_[index_].type == Lexer::EXP) {
+        break;
+    case Lexer::EXP:
         func = Lexer::EXP;
         ++index_;
+        break;
+    default:
+        break;
     }
 
     if (items_[index_].type == Lexer::PARE_OP) {
@@ -137,20 +167,23 @@ double Parser::factor() {
         }
         ++index_;
 
-        if (func == Lexer::ABS) { return abs(res); }
-        if (func == Lexer::SQRT) { return sqrt(res); }
-        if (func == Lexer::SIN) { return sin(res); }
-        if (func == Lexer::COS) { return cos(res); }
-        if (func == Lexer::TAN) { return tan(res); }
-        if (func == Lexer::ASIN) { return asin(res); }
-        if (func == Lexer::ACOS) { return acos(res); }
-        if (func == Lexer::ATAN) { return atan(res); }
-        if (func == Lexer::SINH) { return sinh(res); }
-        if (func == Lexer::COSH) { return cosh(res); }
-        if (func == Lexer::TANH) { return tanh(res); }
-        if (func == Lexer::LOG) { return log(res); }
-        if (func == Lexer::LOG10) { return log10(res); }
-        if (func == Lexer::EXP) { return exp(res); }
+        switch (func) {
+        case Lexer::ABS: return abs(res);
+        case Lexer::SQRT: return sqrt(res);
+        case Lexer::SIN: return sin(res);
+        case Lexer::COS: return cos(res);
+        case Lexer::TAN: return tan(res);
+        case Lexer::ASIN: return asin(res);
+        case Lexer::ACOS: return acos(res);
+        case Lexer::ATAN: return atan(res);
+        case Lexer::SINH: return sinh(res);
+        case Lexer::COSH: return cosh(res);
+        case Lexer::TANH: return tanh(res);
+        case Lexer::LOG: return log(res);
+        case Lexer::LOG10: return log10(res);
+        case Lexer::EXP: return exp(res);
+        }
+
         if (items_[index_].type == Lexer::POW) {
             ++index_;
             res = pow(res, factor());
@@ -162,8 +195,10 @@ double Parser::factor() {
     return number();
 }
 
-double Parser::term() {
+double Parser::term()
+{
     double res = factor();
+
     for (;;) {
         if (items_[index_].type == Lexer::MUL) {
             ++index_;
@@ -188,6 +223,7 @@ double Parser::term() {
                 fprintf(stderr, "%d: zero division\n", index_ - 1);
                 return 0.0;
             }
+
             int q = static_cast<int>(res / d);
             if (res < 0.0) {
                 res = res + abs(q * d);
@@ -198,20 +234,26 @@ double Parser::term() {
             break;
         }
     }
+
     return res;
 }
 
-double Parser::expression() {
+double Parser::expression()
+{
     double res = term();
+
     for (;;) {
-        if (items_[index_].type == Lexer::PLUS) {
+        switch (items_[index_].type) {
+        case Lexer::PLUS:
             ++index_;
             res += term();
-        } else if (items_[index_].type == Lexer::MINUS) {
+            break;
+        case Lexer::MINUS:
             ++index_;
             res -= term();
-        } else {
             break;
+        default:
+            return res;
         }
     }
 

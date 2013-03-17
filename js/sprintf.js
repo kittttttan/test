@@ -1,3 +1,6 @@
+var StrEx = require('../string.js');
+var repeatString = StrEx.repeatString;
+
 /**
  * sprintf
  * @param {string} str
@@ -50,24 +53,7 @@ function sprintf(str) {
     });
 }
 
-/**
- * repeat string
- * @param {string} str
- * @param {number} repeat
- * @return {string}
- */
-function repeatString(str, repeat) {
-  var result = '';
-  for (; repeat > 0; repeat >>= 1, str += str) {
-    if (repeat & 1) {
-      result += str;
-    }
-  }
-  return result;
-}
-
 // exports for node
 if (typeof exports !== 'undefined') {
-  exports.sprintf = sprintf;
   exports.repeatString = repeatString;
 }

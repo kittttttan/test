@@ -21,15 +21,13 @@ void Count()
 
 BOOL Create(int nMax)
 {
-    int i, c;
+    int i;
+
     for (i = 0; i < nMax; ++i) {
         hThread[i] = CreateThread(NULL, 0,
                         (LPTHREAD_START_ROUTINE)ThreadProc,
                         (LPVOID)i, 0, &dwThreadID[i]);
-    }
-   
-    for (c = 0; i < nMax; ++c) {
-        if (hThread[c] == NULL) {
+        if (!hThread[i]) {
             return FALSE;
         }
     }
@@ -40,6 +38,7 @@ BOOL Create(int nMax)
 void Close(int nMax)
 {
     int i;
+
     for (i = 0; i < nMax; ++i) {
         if (hThread[i]) {
             CloseHandle(hThread[i]);
@@ -52,6 +51,7 @@ void Close(int nMax)
 void ThreadProc(int nThreadNo)
 {
     int i;
+
     for (i = 1; i < 7; ++i) {
         printf("Thread %d: %d\n", nThreadNo, i);
     }

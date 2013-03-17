@@ -6,7 +6,7 @@
  * http://en.wikipedia.org/wiki/C%2B%2B11
  */
 
-#include <stdio.h>
+#include <cstdio>
 #include <algorithm>
 #include <vector>
 #include <initializer_list>
@@ -31,11 +31,11 @@ extern template class std::vector<RValue>;
 
 void nullptr_test(int n) {
     //printf("call " __FUNCSIG__ "\n");
-    printf("call void nullptr_test(int n)\n");
+    printf("call void nullptr_test(int n): %d\n", n);
 }
 void nullptr_test(char* n) {
     //printf("call " __FUNCSIG__ "\n");
-    printf("call void nullptr_test(char* n)\n");
+    printf("call void nullptr_test(char* n): %s\n", n);
 }
 
 // extended friend
@@ -133,9 +133,9 @@ int main() {
     const std::vector<Local> vec(1, Local());
     vec.front().print();
 
-    printf("\n** exception_ptr **\n");
-    std::exception_ptr ep;
-    ep = std::current_exception();
+    //printf("\n** exception_ptr **\n");
+    //std::exception_ptr ep;
+    //ep = std::current_exception();
     //try {
     //    std::rethrow_exception(ep);
     //} catch (std::exception const& e) {

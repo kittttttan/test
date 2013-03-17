@@ -6,22 +6,24 @@
 int main(int argc, char* argv[]) {
     using namespace tc;
 
-    const int MAX_CHAR = 512;
     errno_t err = 0;
+    static const size_t MAX_CHAR = 512;
     char input_str[MAX_CHAR] = "";
+    
+    // option
     for (int i = 1; i < argc; ++i) {
-        if (strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--help") == 0) {
+        if (!strcmp(argv[i], "-h") || !strcmp(argv[i], "--help")) {
             printf("  TinyCalc [filename]\n");
             goto END;
         } else {
             FILE* fp;
 #ifdef _MSC_VER
             err = fopen_s(&fp, argv[i], "r");
+            if (err) {
 #else
             fp = fopen(argv[i], "r");
+            if (!fp) {
 #endif
-            if (err) {
-                fclose(fp);
                 fprintf(stderr, "failed open file: %s\n", argv[i]);
                 goto END;
             }
@@ -55,13 +57,14 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    // main loop
     for (;;) {
         printf("> ");
         fgets(input_str, MAX_CHAR, stdin);
         fflush(stdin);
         input_str[strlen(input_str) - 1] = '\0';
 
-        if (strcmp(input_str, "") == 0 || strcmp(input_str, "q") == 0) {
+        if (!strcmp(input_str, "") || !strcmp(input_str, "q")) {
             printf("exit\n");
             goto END;
         }

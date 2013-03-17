@@ -70,7 +70,7 @@ private:
     int index_;
     int line_;
     int pos_;
-    int length_;
+    size_t length_;
     errno_t err_;
     Status status_;
     std::vector<Item> items_;

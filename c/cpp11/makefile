@@ -1,7 +1,8 @@
-TARGET = Cpp11
-CFLAGS	= -g -Wall -std=c++11
+TARGET = cpp11
 CXX = g++
-OBJS = gcc47.o
+CFLAGS	= -g -Wall -Wextra -std=c++11
+OBJDIR = obj/
+OBJS = $(OBJDIR)gcc47.o #$(OBJDIR)main.o
 
 all: $(TARGET)
 
@@ -11,7 +12,10 @@ clean:
 $(TARGET): $(OBJS)
 	$(CXX) -o $@ $(OBJS)
 
-.cc.o:
-	$(CXX) $(CFLAGS) -c $<
+$(OBJDIR)%.o: %.cc
+	$(CC) $(CFLAGS) -c -o $@ $<
 
-main.o:
+$(OBJS): | $(OBJDIR)
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
