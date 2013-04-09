@@ -1,4 +1,4 @@
-var StrEx = require('../string.js');
+var StrEx = require('./string.js');
 var repeatString = StrEx.repeatString;
 
 /**
@@ -55,5 +55,5 @@ function sprintf(str) {
 
 // exports for node
 if (typeof exports !== 'undefined') {
-  exports.repeatString = repeatString;
+  exports.sprintf = sprintf;
 }

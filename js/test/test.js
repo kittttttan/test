@@ -1,17 +1,25 @@
 if (typeof require != 'undefined') {
   var lib = require('../lib.js');
-  assert = lib.assert;
+  var assert = lib.assert;
+  
+  var uu = require('../uuid.js');
+  var uuid = uu.uuid;
+  
   var sp = require('../sprintf.js');
-  sprintf = sp.sprintf;
+  var sprintf = sp.sprintf;
+  
   var array = require('../array.js');
-  range = array.range;
+  var range = array.range;
+  
   var string = require('../string.js');
-  genRandomString = string.genRandomString;
+  var genRandomString = string.genRandomString;
+  
   var strconv = require('../strconv.js');
-  proper = strconv.proper;
-  toZenkaku = strconv.toZenkaku;
+  var proper = strconv.proper;
+  var toZenkaku = strconv.toZenkaku;
+  
   var date = require('../date.js');
-  dateFormat = date.dateFormat;
+  var dateFormat = date.dateFormat;
 }
 
 if (typeof console == 'undefined') {
@@ -20,6 +28,18 @@ if (typeof console == 'undefined') {
       document.writeln(a);
     }
   };
+}
+
+function uuidTest() {
+  console.log('Test uuid ...');
+  var u = uuid();
+  console.log('version: '+ u.version());
+  console.log('variant: '+ u.variant());
+  var id = u.generate();
+  console.log(id);
+  u.fromString(id);
+  console.log(u.toString());
+  console.log('');
 }
 
 function sprintfTest() {
@@ -34,18 +54,21 @@ function rangeTest() {
   console.log('Test range ...');
   console.log('range(7) = '+ range(7));
   console.log('range(3, 0, -0.5) = '+ range(3, 0, -0.5));
+  console.log('');
 }
 
 function genRandomStringTest() {
   console.log('Test genRandomString ...');
   console.log('genRandomString(10) = '+ genRandomString(10));
   console.log('genRandomString(7, 48) = '+ genRandomString(7, 48));
+  console.log('');
 }
 
 function strConvTest() {
   console.log('Test strConv ...');
   console.log('proper("sample test") = '+ proper('sample text'));
   console.log('toZenkaku("sample test") = '+ toZenkaku('sample text'));
+  console.log('');
 }
 
 function dateFormatTest() {
@@ -54,6 +77,7 @@ function dateFormatTest() {
   console.log(dateFormat('yyyy-MM-dd E', d));
   console.log(dateFormat('M/d a hh:mm:ss.SZ', d));
   console.log(dateFormat('MMM, yy', d));
+  console.log('');
 }
 
 function nativeDateTest() {
@@ -73,11 +97,13 @@ function nativeDateTest() {
   console.log(d.getSeconds());
   console.log(d.getMilliseconds());
   console.log(d.getTimezoneOffset());
+  console.log('');
 }
 
 function mainTest() {
   var d = Date.now();
-
+  
+  uuidTest();
   sprintfTest();
   rangeTest();
   genRandomStringTest();

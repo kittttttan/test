@@ -14,6 +14,7 @@ function assert(b, s) {
  * Count function called time in a while
  * @param {function} f
  * @param {number=} [opt_ms=1000] Interval
+ * @return {number} loops/sec
  */
 function bench(f, opt_ms) {
   var b = Date.now(),
