@@ -1,6 +1,5 @@
-#include "parser.h"
+﻿#include "parser.h"
 
-//#define _USE_MATH_DEFINES
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>
@@ -9,7 +8,10 @@ namespace tc {
 
 using namespace std;
 
-Parser::Parser(const std::vector<Lexer::Item>& items) :
+const double PI = 3.14159265358979323846;
+const double E = 2.71828182845904523536;
+
+Parser::Parser(const vector<Lexer::Item>& items) :
     index_(0),
     err_(0),
     value_(0.0)
@@ -68,10 +70,10 @@ double Parser::number()
         res = atof(items_[index_].value.c_str());
         break;
     case  Lexer::PI:
-        res = M_PI;
+        res = PI;
         break;
     case Lexer::E:
-        res = M_E;
+        res = E;
         break;
     default:
         fprintf(stderr, "invalid number\n");

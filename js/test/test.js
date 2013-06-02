@@ -1,26 +1,20 @@
-if (typeof require != 'undefined') {
-  var lib = require('../lib.js');
-  var assert = lib.assert;
-  
-  var uu = require('../uuid.js');
-  var uuid = uu.uuid;
-  
-  var sp = require('../sprintf.js');
-  var sprintf = sp.sprintf;
-  
-  var array = require('../array.js');
-  var range = array.range;
-  
-  var string = require('../string.js');
-  var genRandomString = string.genRandomString;
-  
-  var strconv = require('../strconv.js');
-  var proper = strconv.proper;
-  var toZenkaku = strconv.toZenkaku;
-  
-  var date = require('../date.js');
-  var dateFormat = date.dateFormat;
+if (typeof require !== 'undefined') {
+  Util = require('../lib.js').Util;
+  StringUtil = require('../string.js').StringUtil;
+  uuid = require('../uuid.js').uuid;
+  ArrayUtil = require('../array.js').ArrayUtil;
+  StringConverter = require('../strconv.js').StringConverter;
+  Random = require('../random.js').Random;
+  DateUtil = require('../date.js').DateUtil;
 }
+
+var assert = Util.assert;
+var range = ArrayUtil.range;
+var genRandomString = StringUtil.genRandomString;
+var proper = StringConverter.proper;
+var toZenkaku = StringConverter.toZenkaku;
+var sprintf = StringUtil.format;
+var dateFormat = DateUtil.format;
 
 if (typeof console == 'undefined') {
   console={
@@ -100,6 +94,26 @@ function nativeDateTest() {
   console.log('');
 }
 
+function randomTest() {
+  var r = new Random();
+  var arr1 = [];
+  var arr2 = [];
+  var arr3 = [];
+  for (var i = 0; i < 7; ++i) {
+    arr1.push(r.int32());
+  }
+  for (var i = 0; i < 4; ++i) {
+    arr2.push(r.real2());
+  }
+  for (var i = 0; i < 37; ++i) {
+    arr3.push((r.real2() * 7 | 0) + 1);
+  }
+  
+  console.log(arr1.join(' '));
+  console.log(arr2.join(' '));
+  console.log(arr3.join(' '));
+}
+
 function mainTest() {
   var d = Date.now();
   
@@ -109,6 +123,7 @@ function mainTest() {
   genRandomStringTest();
   strConvTest();
   dateFormatTest();
+  randomTest();
 
   console.log((Date.now() - d) +'ms');
 }

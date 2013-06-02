@@ -1,4 +1,4 @@
-(function(){
+(function(exports){
 'use strict';
 
 /**
@@ -179,7 +179,7 @@ function hex(n, len) {
 
 /**
  * @param {Uuid} u
- * @retunr {string}
+ * @return {string}
  */
 function uuid4(u) {  
   u._time_low = rand(32);
@@ -193,14 +193,7 @@ function uuid4(u) {
   return u.toString();
 }
 
-// exports for node
-if (typeof exports !== 'undefined') {
-  exports.uuid = uuid;
-}
+// exports
+exports.uuid = uuid;
 
-// exports for browser
-if (typeof window !== 'undefined') {
-  window.uuid = uuid;
-}
-
-}());
+}(typeof exports !== 'undefined' ? exports : this));

@@ -1,5 +1,10 @@
-var StrEx = require('./string.js');
-var repeatString = StrEx.repeatString;
+(function(exports){
+'use strict';
+
+if (typeof require !== 'undefined') {
+  StringUtil = require('./string.js').StringUtil;
+}
+var repeatString = StringUtil.repeatString;
 
 var Encode = {
   /**
@@ -258,7 +263,8 @@ var Decode = {
   }
 };
 
-if (typeof exports !== 'undefined') {
-  exports.Encode = Encode;
-  exports.Decode = Decode;
-}
+// exports
+exports.Encode = Encode;
+exports.Decode = Decode;
+
+}(typeof exports !== 'undefined' ? exports : this));

@@ -1,6 +1,8 @@
-var Enc = require('./enc.js');
-var Encode = Enc.Encode;
-var Decode = Enc.Decode;
+if (typeof require !== 'undefined') {
+  var Enc = require('./enc.js');
+  Encode = Enc.Encode;
+  Decode = Enc.Decode;
+}
 
 var max = 7;
 var i, j;

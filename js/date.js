@@ -1,3 +1,6 @@
+(function(exports){
+'use strict';
+
 /**
  * @param {numer} y year
  * @return {boolean}
@@ -96,9 +99,13 @@ function dateFormat(s, d) {
       ;
 }
 
-// exports for node
-if (typeof exports !== 'undefined') {
-  exports.isLeapYear = isLeapYear;
-  exports.getDaysInMonth = getDaysInMonth;
-  exports.dateFormat = dateFormat;
-}
+var DateUtil = {
+  isLeapYear: isLeapYear,
+  getDaysInMonth: getDaysInMonth,
+  format: dateFormat
+};
+
+// exports
+exports.DateUtil = DateUtil;
+
+}(typeof exports !== 'undefined' ? exports : this));

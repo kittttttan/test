@@ -1,4 +1,4 @@
-#include "parser.h"
+﻿#include "parser.h"
 
 #include <cstdio>
 #include <cstring>
@@ -9,12 +9,16 @@ int main(int argc, char* argv[]) {
     errno_t err = 0;
     static const size_t MAX_CHAR = 512;
     char input_str[MAX_CHAR] = "";
+    bool debug = false;
     
     // option
     for (int i = 1; i < argc; ++i) {
         if (!strcmp(argv[i], "-h") || !strcmp(argv[i], "--help")) {
-            printf("  TinyCalc [filename]\n");
+            printf("  TinyCalc [-d] [filename]\n");
             goto END;
+        } else if (!strcmp(argv[i], "-d")) {
+          printf("debug mode\n");
+            debug = true;
         } else {
             FILE* fp;
 #ifdef _MSC_VER
@@ -43,7 +47,7 @@ int main(int argc, char* argv[]) {
                 fprintf(stderr, "failed lex\n");
                 goto END;
             }
-            lexer.print();
+            if (debug) { lexer.print(); }
 
             Parser parser(lexer.getItems());
             err = parser.parse();
@@ -75,7 +79,7 @@ int main(int argc, char* argv[]) {
             fprintf(stderr, "failed lex\n");
             continue;
         }
-        lexer.print();
+        if (debug) { lexer.print(); }
 
         Parser parser(lexer.getItems());
         err = parser.parse();

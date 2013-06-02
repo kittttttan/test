@@ -1,10 +1,17 @@
-#include "stdafx.h"
-
-#ifdef _MSC_VER
-#define PRIdS "Id"
+﻿#ifdef _MSC_VER
+// for Windows
+#define PRIdS "Iu"
 #else
-#define PRIdS "zd"
+// for MinGW
+#ifdef _WIN32
+#define _GNU_SOURCE 1
 #endif
+// for gcc
+#define PRIdS "zu"
+#endif
+
+#include <stdio.h>
+#include <stdlib.h>
 
 int main(void) {
     printf("char: %" PRIdS "\n", sizeof(char));
@@ -13,7 +20,6 @@ int main(void) {
     printf("long: %" PRIdS "\n", sizeof(long));
     printf("long long: %" PRIdS "\n", sizeof(long long));
     printf("pointer: %" PRIdS "\n", sizeof(void*));
-    printf("bool: %" PRIdS "\n", sizeof(bool));
 
 #ifdef _MSC_VER
     system("pause");

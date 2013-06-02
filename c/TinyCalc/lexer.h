@@ -1,9 +1,13 @@
-#pragma once
+﻿#pragma once
 #include <vector>
 #include <cerrno>
 #include <string>
 
 namespace tc {
+
+#ifndef _WIN32
+typedef int errno_t;
+#endif
 
 class Lexer {
 public:

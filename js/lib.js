@@ -1,3 +1,6 @@
+(function(exports){
+'use strict';
+
 /**
  * @param {boolean} b
  * @param {string} s
@@ -26,8 +29,29 @@ function bench(f, opt_ms) {
   return i * 1000 / opt_ms;
 }
 
-// exports for node
-if (typeof exports !== 'undefined') {
-  exports.assert = assert;
-  exports.bench = bench;
+/**
+ * 
+ * @param {function} f
+ * @param {number=} [opt_ms=10000] times
+ * @return {number} loops
+ */
+function timeit(f, opt_times) {
+  var t = Date.now(),
+      i = 0;
+  if (!opt_times) { opt_times = 10000; }
+  for (; i < opt_times; ++i) {
+    f();
+  }
+  return Date.now() - t;
 }
+
+var Util = {
+  assert: assert,
+  bench: bench,
+  timeit: timeit
+};
+
+// exports
+exports.Util = Util;
+
+}(typeof exports !== 'undefined' ? exports : this));

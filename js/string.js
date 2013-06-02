@@ -1,129 +1,181 @@
-/**
- * repeat string
- * @param {string} str
- * @param {number} repeat
- * @return {string}
- */
-function repeatString(str, repeat) {
-  var result = '';
-  for (; repeat > 0; repeat >>= 1, str += str) {
-    if (repeat & 1) {
-      result += str;
+(function(exports){
+'use strict';
+
+var StringUtil = {
+  // RegExp snippets
+  regURI: /\w+:\/\/[\w\-.\/?%&=:@;]*/g,
+  regXMLTag: /<\/?\w+[^>]*>/g,
+  regCComment: /\/\*[\s\S]*?\*\//gm,
+  regLineComment: /\/\/.*$/gm,
+  regDoubleQuote: /"([^\\"\n]|\\.)*"/g, // "
+
+  /**
+   * repeat string
+   * @param {string} str
+   * @param {number} repeat
+   * @return {string}
+   */
+  repeatString: function(str, repeat) {
+    var result = '';
+    for (; repeat > 0; repeat >>= 1, str += str) {
+      if (repeat & 1) {
+        result += str;
+      }
     }
+    return result;
+  },
+
+  /**
+   * sprintf
+   * @param {string} str
+   * @return {string}
+   */
+  format: function(str) {
+    var argv = arguments;
+    var index = 1;
+    
+    return str.replace(
+      /%([+\-#0])?(\d+)?(?:\.(\d+))?([%defoxs])/g,
+      function(src, flag, width, prec, type) {
+        if (type === '%') { return '%'; }
+        var s = '', n = 0;
+        if (type === 's') {
+          s = argv[index];
+        }
+        else if (type === 'd') {
+          n = argv[index] | 0;
+          s = (flag === '+' && n > 0 ? '+' : '') + n;
+        }
+        else if (type === 'o') {
+          n = argv[index] | 0;
+          s = (flag === '+' && n > 0 ? '+' : '') +
+              (flag === '#' ? '0' : '') + (n).toString(8);
+        }
+        else if (type === 'x') {
+          n = argv[index] | 0;
+          s = (flag === '+' && n > 0 ? '+' : '') +
+              (flag === '#' ? '0x' : '') + (n).toString(16);
+        }
+        else if (type === 'e') {
+          s = (flag === '+' && argv[index] > 0 ? '+' : '') +
+              (prec ? argv[index].toExponential(prec) : argv[index].toString());
+        }
+        else if (type === 'f') {
+          s = (flag === '+' && argv[index] > 0 ? '+' : '') +
+              (prec ? argv[index].toFixed(prec) : argv[index].toString());
+        }
+        ++index;
+        if (width > s.length) {
+          var prefix = repeatString((flag === '0' ? '0': ' '), width);
+          if (flag === '-') {
+            s += prefix;
+          } else {
+            s = prefix + s;
+          }
+          return s.slice(-width);
+        }
+        return s;
+      });
+  },
+
+  /**
+   * @param {string} s
+   * @return {string}
+   */
+  escapeHTML: function(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/'/g, '&apos;').replace(/"/g, '&quot;'); // '
+  },
+
+  /**
+   * @param {string} s
+   * @return {string}
+   */
+  escapeJS: function(s) {
+    return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"')
+        .replace(/'/g, "\\'").replace(/\//g, '\\/') // '
+        // .replace(/</g, '\\x3c').replace(/>/g, '\\x3e')
+        ;
+  },
+
+  /**
+   * @param {string} s
+   * @return {string}
+   */
+  trimLeft: function(s) {
+    return s.replace(/^\s+$/, '');
+  },
+
+  /**
+   * @param {string} s
+   * @return {string}
+   */
+  trimRight: function(s) {
+    return s.replace(/\s+$/, '');
+  },
+
+  /**
+   * @param {string} s
+   * @return {string}
+   */
+  trim: function(s) {
+    return s.replace(/^\s+|\s+$/, '');
+  },
+
+  /**
+   * @param {string} s
+   * @return {string}
+   */
+  nobr: function(s) {
+    return s.replace(/[\r\n]+/g, '');
+  },
+
+  /**
+   * @param {string} src
+   * @param {string} suffix
+   * @return {boolean}
+   */
+  startsWith: function(src, suffix) {
+    return !src.indexOf(suffix);
+  },
+
+  /**
+   * @param {string} src
+   * @param {string} suffix
+   * @return {boolean}
+   */
+  endsWith: function(src, suffix) {
+    var len = suffix.length;
+    if (src.length < len) return false;
+    return src.slice(-len) === suffix;
+  },
+
+  /**
+   * @param {number} len
+   * @param {number} opt_filter
+   */
+  genRandomString: function(len, opt_filter) {
+    var str = '';
+    var letter = '';
+
+    if (!(opt_filter & 1)) { letter += 'abcdefghijklmnopqrstuvwxyz'; }
+    if (!((opt_filter >> 1) & 1)) { letter += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; }
+    if (!((opt_filter >> 2) & 1)) { letter += '0123456789'; }
+    if (!((opt_filter >> 3) & 1)) { letter += '_'; }
+    if (!((opt_filter >> 4) & 1)) { letter += '!\"#$%&\'()=~|-^@[;:],./`{+*}>?'; }
+    if (!((opt_filter >> 5) & 1)) { letter += '(`~!@#$%^&*()_+-={}|[]\\:\";\'<>?,./)'; }
+
+    for (var i = 0, range = letter.length + 1; i < len; ++i) {
+      str += letter.charAt(Math.random() * range | 0);
+    }
+
+    return str;
   }
-  return result;
-}
+};
 
-/**
- * @param {string} s
- * @return {string}
- */
-function escapeHTML(s) {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      .replace(/'/g, '&apos;').replace(/"/g, '&quot;'); // '
-}
+var repeatString = StringUtil.repeatString;
 
-/**
- * @param {string} s
- * @return {string}
- */
-function escapeJS(s) {
-  return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"')
-      .replace(/'/g, "\\'").replace(/\//g, '\\/') // '
-      // .replace(/</g, '\\x3c').replace(/>/g, '\\x3e')
-      ;
-}
+// exports
+exports.StringUtil = StringUtil;
 
-/**
- * @param {string} s
- * @return {string}
- */
-function trimLeft(s) {
-  return s.replace(/^\s+$/, '');
-}
-
-/**
- * @param {string} s
- * @return {string}
- */
-function trimRight(s) {
-  return s.replace(/\s+$/, '');
-}
-
-/**
- * @param {string} s
- * @return {string}
- */
-function trim(s) {
-  return s.replace(/^\s+|\s+$/, '');
-}
-
-/**
- * @param {string} s
- * @return {string}
- */
-function nobr(s) {
-  return s.replace(/[\r\n]+/g, '');
-}
-
-/**
- * @param {string} src
- * @param {string} suffix
- * @return {boolean}
- */
-function startsWith(src, suffix) {
-  return !src.indexOf(suffix);
-}
-
-/**
- * @param {string} src
- * @param {string} suffix
- * @return {boolean}
- */
-function endsWith(src, suffix) {
-  var len = suffix.length;
-  if (src.length < len) return false;
-  return src.slice(-len) === suffix;
-}
-
-// RegExp snippets
-var regURI = /\w+:\/\/[\w\-.\/?%&=:@;]*/g;
-var regXMLTag = /<\/?\w+[^>]*>/g;
-var regCComment = /\/\*[\s\S]*?\*\//gm;
-var regLineComment = /\/\/.*$/gm;
-var regDoubleQuote = /"([^\\"\n]|\\.)*"/g; // "
-
-/**
- * @param {number} len
- * @param {number} opt_filter
- */
-function genRandomString(len, opt_filter) {
-  var str = '',
-      letter = '';
-  if (!(opt_filter & 1)) letter += 'abcdefghijklmnopqrstuvwxyz';
-  if (!((opt_filter >> 1) & 1)) letter += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  if (!((opt_filter >> 2) & 1)) letter += '0123456789';
-  if (!((opt_filter >> 3) & 1)) letter += '_';
-  if (!((opt_filter >> 4) & 1)) letter += '!\"#$%&\'()=~|-^@[;:],./`{+*}>?';
-  if (!((opt_filter >> 5) & 1)) letter += '(`~!@#$%^&*()_+-={}|[]\\:\";\'<>?,./)';
-
-  for (var i = 0, range = letter.length + 1; i < len; ++i) {
-    str += letter.charAt(Math.random() * range | 0);
-  }
-
-  return str;
-}
-
-// exports for node
-if (typeof exports !== 'undefined') {
-  exports.repeatString = repeatString;
-  exports.escapeHTML = escapeHTML;
-  exports.escapeJS = escapeJS;
-  exports.trimLeft = trimLeft;
-  exports.trimRight = trimRight;
-  exports.trim = trim;
-  exports.nobr = nobr;
-  exports.startsWith = startsWith;
-  exports.endsWith = endsWith;
-  exports.genRandomString = genRandomString;
-}
+}(typeof exports !== 'undefined' ? exports : this));
