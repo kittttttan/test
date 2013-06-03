@@ -2,9 +2,9 @@
 'use strict';
 
 if (typeof require !== 'undefined') {
-  StringUtil = require('./string.js').StringUtil;
+  var StringUtil = require('./string.js').StringUtil;
 }
-var repeatString = StringUtil.repeatString;
+var repeat = StringUtil.repeat;
 
 var Encode = {
   /**
@@ -25,7 +25,7 @@ var Encode = {
       latter = '0';
     }
     
-    return repeatString(former, n) + latter;
+    return repeat(former, n) + latter;
   },
   
   /**
@@ -36,7 +36,7 @@ var Encode = {
     if (n < 1) return undefined;
     
     var bin = n.toString(2);
-    return repeatString('0', bin.length - 1) + bin;
+    return repeat('0', bin.length - 1) + bin;
   },
   
   /**
@@ -88,13 +88,13 @@ var Encode = {
     
     var res = Encode.unary(q, true);
     if (isBin) {
-      res += (repeatString('0', b) + r.toString(2)).slice(-b);
+      res += (repeat('0', b) + r.toString(2)).slice(-b);
     } else {
       ++b;
       if (r < (1 << b) - m) {
-        res += (repeatString('0', b - 1) + r.toString(2)).slice(-(b - 1));
+        res += (repeat('0', b - 1) + r.toString(2)).slice(-(b - 1));
       } else {
-        res += (repeatString('0', b) + (r + (1 << b) - m).toString(2)).slice(-b);
+        res += (repeat('0', b) + (r + (1 << b) - m).toString(2)).slice(-b);
       }
     }
     //console.log('m=%d, b=%d (bin=%s), 2^b-m=%d, r=%d',

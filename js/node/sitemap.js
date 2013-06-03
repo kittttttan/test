@@ -1,8 +1,10 @@
 var fs = require('fs'),
     util = require('util'),
     
-    date = require('../date'),
-    string = require('../string'),
+    DateUtil = require('../date').DateUtil,
+    dateFormat = DateUtil.format,
+    StringUtil = require('../string').StringUtil,
+    endsWith = StringUtil.endsWith,
 
     domain = 'http://kittttttan.web.fc2.com',
     out = '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n'+
@@ -17,9 +19,9 @@ function ls(path) {
     fname = prefix + files[i];
     stat = fs.statSync(fname);
     if (stat.isFile()) {
-      if (string.endsWith(files[i], '.htm') ||
-          string.endsWith(files[i], '.html')) {
-        mtime = date.dateFormat('yyyy-MM-dd', stat.mtime);
+      if (endsWith(files[i], '.htm') ||
+          endsWith(files[i], '.html')) {
+        mtime = dateFormat('yyyy-MM-dd', stat.mtime);
         out += '<url><loc>'+ domain + fname.substring(1) +
               '</loc><lastmod>'+ mtime + '</lastmod></url>\n';
       }

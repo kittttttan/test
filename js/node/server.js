@@ -2,7 +2,8 @@ var http = require('http'),
     fs = require('fs'),
     qs = require('querystring'),
     url = require('url'),
-    dateUtil = require('../date'),
+    DateUtil = require('../date').DateUtil,
+    dateFormat = DateUtil.format,
     
     ROOT = __dirname,
     MIME = {
@@ -28,7 +29,7 @@ var http = require('http'),
  * @param {string} str
  */
 function logging(str) {
-  str = dateUtil.dateFormat('yyyy-MM-dd HH:mm:ss Z', new Date()) + ' ' + str;
+  str = dateFormat('yyyy-MM-dd HH:mm:ss Z', new Date()) + ' ' + str;
   console.log(str);
   fs.appendFile('node.log', str + '\n', function (err) {
     if (err) throw err;

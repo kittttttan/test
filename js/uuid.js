@@ -1,6 +1,8 @@
 (function(exports){
 'use strict';
 
+var rand = Math.random;
+
 /**
  * A Universally Unique IDentifier (UUID) URN Namespace
  * @see http://www.ietf.org/rfc/rfc4122.txt
@@ -152,9 +154,9 @@ function uuidStr(u, id) {
  */
 function rand(n) {
   if (n < 0) return NaN;
-  if (n <= 30) return (0 | Math.random() * (1 << n));
-  if (n <= 53) return (0 | Math.random() * (1 << 30))
-                    + (0 | Math.random() * (1 << (n - 30))) * (1 << 30);
+  if (n <= 30) return (0 | rand() * (1 << n));
+  if (n <= 53) return (0 | rand() * (1 << 30))
+                    + (0 | rand() * (1 << (n - 30))) * (1 << 30);
   return NaN;
 }
 

@@ -15,7 +15,7 @@ var StringUtil = {
    * @param {number} repeat
    * @return {string}
    */
-  repeatString: function(str, repeat) {
+  repeat: function(str, repeat) {
     var result = '';
     for (; repeat > 0; repeat >>= 1, str += str) {
       if (repeat & 1) {
@@ -66,7 +66,7 @@ var StringUtil = {
         }
         ++index;
         if (width > s.length) {
-          var prefix = repeatString((flag === '0' ? '0': ' '), width);
+          var prefix = repeat((flag === '0' ? '0': ' '), width);
           if (flag === '-') {
             s += prefix;
           } else {
@@ -173,7 +173,7 @@ var StringUtil = {
   }
 };
 
-var repeatString = StringUtil.repeatString;
+var repeat = StringUtil.repeat;
 
 // exports
 exports.StringUtil = StringUtil;
