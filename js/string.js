@@ -1,6 +1,10 @@
 (function(exports){
 'use strict';
 
+/**
+ * StringUtil
+ * @class StringUtil
+ */
 var StringUtil = {
   // RegExp snippets
   regURI: /\w+:\/\/[\w\-.\/?%&=:@;]*/g,
@@ -11,6 +15,7 @@ var StringUtil = {
 
   /**
    * repeat string
+   * @method StringUtil.repeat
    * @param {string} str
    * @param {number} repeat
    * @return {string}
@@ -27,6 +32,7 @@ var StringUtil = {
 
   /**
    * sprintf
+   * @method StringUtil.format
    * @param {string} str
    * @return {string}
    */

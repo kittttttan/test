@@ -6,8 +6,13 @@ if (typeof require !== 'undefined') {
 }
 var repeat = StringUtil.repeat;
 
+/**
+ * Encode
+ * @class Encode
+ */
 var Encode = {
   /**
+   * @method Encode.unary
    * @param {number}  n     natural number
    * @param {boolean} [alt]   
    * @return {string} unary coding
@@ -29,6 +34,7 @@ var Encode = {
   },
   
   /**
+   * @method Encode.eliasGamma
    * @param {number}  n     natural number
    * @return {string} Elias gamma coding
    */
@@ -40,6 +46,7 @@ var Encode = {
   },
   
   /**
+   * @method Encode.eliasDelta
    * @param {number} n natural number
    * @return {string} Elias delta coding
    */
@@ -52,6 +59,7 @@ var Encode = {
   },
   
   /**
+   * @method Encode.eliasOmega
    * @param {number} n natural number
    * @return {string} Elias omega coding
    */
@@ -70,6 +78,7 @@ var Encode = {
   },
   
   /**
+   * @method Encode.golomb
    * @param {number} n   natural number
    * @param {number} [m] 
    * @return {string} Golomb coding
@@ -104,8 +113,13 @@ var Encode = {
   }
 };
 
+/**
+ * Decode
+ * @class Decode
+ */
 var Decode = {
   /**
+   * @method Decode.unary
    * @param {string}  str
    * @param {boolean} alt
    * @return {number[]} natural number
@@ -144,6 +158,7 @@ var Decode = {
   },
   
   /**
+   * @method Decode.eliasGamma
    * @param {string} str
    * @return {number[]} natural number
    */
@@ -180,6 +195,7 @@ var Decode = {
   },
   
   /**
+   * @method Decode.eliasDelta
    * @param {string} str
    * @return {number[]} natural number
    */
@@ -229,6 +245,7 @@ var Decode = {
   },
   
   /**
+   * @method Decode.eliasOmega
    * @param {string} str
    * @return {number[]} natural number
    */

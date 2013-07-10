@@ -24,3 +24,5 @@ ts/*.js
 ts/test/*.js
 
 java/ktn/bin/
+
+js/doc/

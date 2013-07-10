@@ -8,24 +8,55 @@ var rand = Math.random;
  * @see http://www.ietf.org/rfc/rfc4122.txt
  *
  * @class Uuid
- *
- * 0xFFFFFFFF00000000 _time_low
- * 0x00000000FFFF0000 _time_mid
- * 0x000000000000F000 _version
- * 0x0000000000000FFF _time_hi
- *
- * 0xC000000000000000 _variant
- * 0x3FFF000000000000 _clock_seq
- * 0x0000FFFFFFFFFFFF _node
  */
 function Uuid() {
+  /**
+   * 0xFFFFFFFF00000000
+   * @private
+   * @property {number} Uuid#_time_low
+   */
   this._time_low = 0;
+  
+  /**
+   * 0x00000000FFFF0000
+   * @private
+   * @property {number} Uuid#_time_mid
+   */
   this._time_mid = 0;
+  
+  /**
+   * 0x000000000000F000
+   * @private
+   * @property {number} Uuid#_version
+   */
   this._version = 4;
+  
+  /**
+   * 0x0000000000000FFF
+   * @private
+   * @property {number} Uuid#_time_hi
+   */
   this._time_hi = 0;
   
+  /**
+   * 0xC000000000000000
+   * @private
+   * @property {number} Uuid#_variant
+   */
   this._variant = 8;
+  
+  /**
+   * 0x3FFF000000000000
+   * @private
+   * @property {number} Uuid#_clock_seq
+   */
   this._clock_seq = 0;
+  
+  /**
+   * 0x0000FFFFFFFFFFFF
+   * @private
+   * @property {number} Uuid#_node
+   */
   this._node = 0;
 }
 

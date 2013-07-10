@@ -1,5 +1,5 @@
 if (typeof require !== 'undefined') {
-  var Enc = require('./enc.js');
+  var Enc = require('../enc.js');
   Encode = Enc.Encode;
   Decode = Enc.Decode;
 }

@@ -1,8 +1,13 @@
 (function(exports){
 'use strict';
 
+/**
+ * ArrayUtil
+ * @class ArrayUtil
+ */
 var ArrayUtil = {
   /**
+   * @method ArrayUtil.isArray
    * @param {Object} o
    * @return {boolean}
    */
@@ -11,6 +16,7 @@ var ArrayUtil = {
   },
 
   /**
+   * @method ArrayUtil.some
    * @param {Array} a
    * @param {function} f
    * @return {boolean}
@@ -26,6 +32,7 @@ var ArrayUtil = {
   },
 
   /**
+   * @method ArrayUtil.every
    * @param {Array} a
    * @param {function} f
    * @return {boolean}
@@ -41,6 +48,7 @@ var ArrayUtil = {
   },
 
   /**
+   * @method ArrayUtil.filter
    * @param {Array} a
    * @param {function} f
    * @return {function}
@@ -56,6 +64,7 @@ var ArrayUtil = {
   },
 
   /**
+   * @method ArrayUtil.forEach
    * @param {Array} a
    * @param {function} f
    */
@@ -66,6 +75,7 @@ var ArrayUtil = {
   },
 
   /**
+   * @method ArrayUtil.map
    * @param {Array} a
    * @param {function} f
    * @return {Array}
@@ -79,6 +89,7 @@ var ArrayUtil = {
   },
 
   /**
+   * @method ArrayUtil.reduce
    * @param {Array} a
    * @param {function} f
    * @return {Array}
@@ -92,6 +103,7 @@ var ArrayUtil = {
   },
 
   /**
+   * @method ArrayUtil.reduceRight
    * @param {Array} a
    * @param {function} f
    * @return {Array}
@@ -105,6 +117,7 @@ var ArrayUtil = {
   },
 
   /**
+   * @method ArrayUtil.sum
    * @param {Array.<number>} a
    * @return {number}
    */
@@ -117,6 +130,7 @@ var ArrayUtil = {
   },
 
   /**
+   * @method ArrayUtil.average
    * @param {Array.<number>} a
    * @return {number}
    */
@@ -129,6 +143,7 @@ var ArrayUtil = {
   },
 
   /**
+   * @method ArrayUtil.unique
    * @param {Array} a
    * @return {Array}
    */
@@ -141,6 +156,7 @@ var ArrayUtil = {
   },
 
   /**
+   * @method ArrayUtil.range
    * @param {number} start
    * @param {number} opt_last
    * @param {number} opt_step

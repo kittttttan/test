@@ -2,6 +2,7 @@
 'use strict';
 
 /**
+ * @method DateUtil.isLeapYear
  * @param {numer} y year
  * @return {boolean}
  */
@@ -10,6 +11,7 @@ function isLeapYear(y) {
 }
 
 /**
+ * @method DateUtil.getDaysInMonth
  * @param {number} y year
  * @param {number} m month
  * @return {number} number of days in month
@@ -28,6 +30,7 @@ function getDaysInMonth(y, m) {
 }
 
 /**
+ * @method DateUtil.dateFormat
  * @param {string} s format string
  * @param {Date} d date
  * @return {string}
@@ -99,6 +102,10 @@ function dateFormat(s, d) {
       ;
 }
 
+/**
+ * DateUtil
+ * @class DateUtil
+ */
 var DateUtil = {
   isLeapYear: isLeapYear,
   getDaysInMonth: getDaysInMonth,

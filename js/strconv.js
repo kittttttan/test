@@ -1,9 +1,14 @@
 (function(exports){
 'use strict';
 
+/**
+ * StringConverter
+ * @class StringConverter
+ */
 var StringConverter = {
   /**
    * Convert string format
+   * @method StringConverter.format
    * @param {string} str
    * @param {number} option
    * <pre>
@@ -40,6 +45,7 @@ var StringConverter = {
   },
 
   /**
+   * @method StringConverter.toZenkaku
    * @param {string} str
    * @return {string}
    */
@@ -52,6 +58,7 @@ var StringConverter = {
   },
 
   /**
+   * @method StringConverter.toZenkakuKatakana
    * @param {string} str
    * @return {string}
    */
@@ -71,6 +78,7 @@ var StringConverter = {
   },
 
   /**
+   * @method StringConverter.toHankaku
    * @param {string} str
    * @return {string}
    */
@@ -83,6 +91,7 @@ var StringConverter = {
   },
 
   /**
+   * @method StringConverter.toHankakuKatakana
    * @param {string} str
    * @return {string}
    */
@@ -102,6 +111,7 @@ var StringConverter = {
   },
 
   /**
+   * @method StringConverter.toKatakana
    * @param {string} str
    * @return {string}
    */
@@ -112,6 +122,7 @@ var StringConverter = {
   },
 
   /**
+   * @method StringConverter.toHiragana
    * @param {string} str
    * @return {string}
    */
@@ -122,6 +133,7 @@ var StringConverter = {
   },
 
   /**
+   * @method StringConverter.proper
    * @param {string} str
    * @return {string}
    */
