@@ -44,7 +44,7 @@ public class Win {
             public void run() {
                 try {
                     Win window = new Win();
-                    window.frmKtn.setVisible(true);
+                    window.getFrmKtn().setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -176,4 +176,9 @@ public class Win {
         }
         return order + suffix;
     }
+
+    public JFrame getFrmKtn() {
+        return frmKtn;
+    }
+    
 }

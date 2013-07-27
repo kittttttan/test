@@ -85,22 +85,24 @@ public class Sample {
 
     public static void writeText() throws IOException {
         FileOutputStream fos = new FileOutputStream(TEXT_FILE, true);
-        OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8");
-        out.write("水樹奈々\n");
-        out.close();
+        try (OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8")) {
+            out.write("水樹奈々\n");
+        }
     }
 
     public static String readText() throws IOException {
-        FileInputStream fis = new FileInputStream(TEXT_FILE);
-        InputStreamReader in = new InputStreamReader(fis, "UTF-8");
-        BufferedReader reader = new BufferedReader(in);
         StringBuffer buf = new StringBuffer();
-        String str = "";
-        while ((str = reader.readLine()) != null) {
-            buf.append(str);
-            buf.append("\n");
+        FileInputStream fis = new FileInputStream(TEXT_FILE);
+        try (
+            InputStreamReader in = new InputStreamReader(fis, "UTF-8");
+            BufferedReader reader = new BufferedReader(in);
+        ) {
+            String str = null;
+            while ((str = reader.readLine()) != null) {
+                buf.append(str);
+                buf.append("\n");
+            }
         }
-        in.close();
 
         return buf.toString();
     }

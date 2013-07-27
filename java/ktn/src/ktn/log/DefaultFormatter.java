@@ -3,8 +3,8 @@ package ktn.log;
 import java.text.SimpleDateFormat;
 import java.util.logging.LogRecord;
 
-public class Formatter extends java.util.logging.Formatter {
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+public class DefaultFormatter extends java.util.logging.Formatter {
+    private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
     @Override
     public String format(LogRecord record) {

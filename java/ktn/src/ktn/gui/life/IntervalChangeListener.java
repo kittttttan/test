@@ -17,7 +17,7 @@ public class IntervalChangeListener implements ActionListener {
 
         try {
             final int ms = Integer.parseInt(text);
-            logger.info("interval: "+ ms);
+            logger.fine("interval: "+ ms);
 
             final LifeFrame frame = Life.getInstance().getFrame();
             final LifePanel panel = (LifePanel) frame.getContentPane();

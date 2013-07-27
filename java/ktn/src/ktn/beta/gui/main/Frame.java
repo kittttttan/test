@@ -71,11 +71,10 @@ public class Frame extends JFrame {
         btnStart = new JButton("Start");
         btnStart.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                TreePath treePath = tree.getSelectionPath();
+                TreePath treePath = getTree().getSelectionPath();
                 if (treePath == null) { return; }
                 
                 Object[] obj = treePath.getPath();
-                if (obj == null) { return; }
                 
                 final int length = obj.length;
                 if (length < 3) { return; }
@@ -85,15 +84,6 @@ public class Frame extends JFrame {
                         Win.main(null);
                     } else if (obj[2].toString().equals("Life")) {
                         Life.main(null);
-                    }
-                }
-
-                if (length < 4) { return; }
-                if (obj[1].toString().equals("Console")) {
-                    if (obj[2].toString().equals("Project Euler")) {
-                        if (obj[3].toString().equals("1")) {
-                            //PE.main(1);
-                        }
                     }
                 }
             }
@@ -117,15 +107,9 @@ public class Frame extends JFrame {
 
             {
                 DefaultMutableTreeNode node_1;
-                DefaultMutableTreeNode node_2;
                 node_1 = new DefaultMutableTreeNode("Gui");
                 node_1.add(new DefaultMutableTreeNode("Win"));
                 node_1.add(new DefaultMutableTreeNode("Life"));
-                add(node_1);
-                node_1 = new DefaultMutableTreeNode("Console");
-                node_2 = new DefaultMutableTreeNode("Project Euler");
-                node_2.add(new DefaultMutableTreeNode("1"));
-                node_1.add(node_2);
                 add(node_1);
             }
         }));
@@ -139,6 +123,10 @@ public class Frame extends JFrame {
         splitPane.setLeftComponent(scrollPane);
         splitPane.setRightComponent(panel);
         contentPane.add(splitPane, BorderLayout.CENTER);
+    }
+
+    public JTree getTree() {
+        return tree;
     }
 
 }

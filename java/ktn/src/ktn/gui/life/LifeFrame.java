@@ -25,7 +25,7 @@ import java.io.File;
 public class LifeFrame extends JFrame {
     private static final long serialVersionUID = 1L;
     private static Logger logger = Logger.getLogger(LifeFrame.class.getName());
-    
+
     private LifePanel contentPane;
     private JMenuBar menuBar;
     private JMenu mnFilef;
@@ -63,101 +63,110 @@ public class LifeFrame extends JFrame {
         mntmStart.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
         mntmStart.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                final Timer timer = contentPane.getTimer();
+                final Timer timer = getContentPane().getTimer();
                 if (timer.isRunning()) {
-                    logger.info("stop");
+                    logger.fine("stop");
                     timer.stop();
                 } else {
-                    logger.info("start");
+                    logger.fine("start");
                     timer.restart();
                 }
             }
         });
-        
+
         mntmOpen = new JMenuItem("Open");
-        mntmOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
+        mntmOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
+                InputEvent.CTRL_MASK));
         mntmOpen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                final Timer timer = contentPane.getTimer();
+                final Timer timer = getContentPane().getTimer();
                 if (timer.isRunning()) {
-                    logger.info("stop");
+                    logger.fine("stop");
                     timer.stop();
                 }
-                
+
                 JFileChooser filechooser = new JFileChooser();
                 FileFilter filter = new FileNameExtensionFilter("Text", "txt");
                 filechooser.addChoosableFileFilter(filter);
                 filechooser.setFileFilter(filter);
-                
-                int selected = filechooser.showOpenDialog(contentPane);
+
+                int selected = filechooser.showOpenDialog(getContentPane());
                 switch (selected) {
                 case JFileChooser.APPROVE_OPTION:
-                    if (!contentPane.getCells().load(filechooser.getSelectedFile())) {
+                    if (!getContentPane().getCells().load(
+                            filechooser.getSelectedFile())) {
                         logger.warning("failed load");
                     }
-                    contentPane.repaint();
+                    getContentPane().repaint();
                     break;
                 case JFileChooser.CANCEL_OPTION:
-                    logger.info("Cancel");
+                    logger.fine("Cancel");
                     break;
                 case JFileChooser.ERROR_OPTION:
-                    logger.info("Error");
+                    logger.fine("Error");
+                    break;
+                default:
                     break;
                 }
             }
         });
-        
+
         mntmReset = new JMenuItem("Reset");
         mntmReset.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, 0));
         mntmReset.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                contentPane.reset();
+                getContentPane().reset();
             }
         });
-        
+
         mntmSave = new JMenuItem("Save");
-        mntmSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
+        mntmSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+                InputEvent.CTRL_MASK));
         mntmSave.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                final Timer timer = contentPane.getTimer();
+                final Timer timer = getContentPane().getTimer();
                 if (timer.isRunning()) {
-                    logger.info("stop");
+                    logger.fine("stop");
                     timer.stop();
                 }
-                
+
                 JFileChooser filechooser = new JFileChooser();
-                FileFilter filterExcel = new FileNameExtensionFilter("Excel (*.xls)", "xls");
-                FileFilter filterText = new FileNameExtensionFilter("Text (*.txt)", "txt");
+                FileFilter filterExcel = new FileNameExtensionFilter(
+                        "Excel (*.xls)", "xls");
+                FileFilter filterText = new FileNameExtensionFilter(
+                        "Text (*.txt)", "txt");
                 filechooser.addChoosableFileFilter(filterExcel);
                 filechooser.addChoosableFileFilter(filterText);
                 filechooser.setFileFilter(filterText);
-                
-                int selected = filechooser.showSaveDialog(contentPane);
+
+                int selected = filechooser.showSaveDialog(getContentPane());
                 switch (selected) {
                 case JFileChooser.APPROVE_OPTION:
                     File file = filechooser.getSelectedFile();
                     FileFilter ff = filechooser.getFileFilter();
                     boolean done = false;
                     if (ff.equals(filterExcel)) {
-                    //if (file.getName().toLowerCase().endsWith(".xls")) {
-                        done = contentPane.getCells().saveAsExcel(file);
+                        // if (file.getName().toLowerCase().endsWith(".xls")) {
+                        done = getContentPane().getCells().saveAsExcel(file);
                     } else {
-                        done = contentPane.getCells().save(file);
+                        done = getContentPane().getCells().save(file);
                     }
                     if (!done) {
                         logger.warning("failed save");
                     }
                     break;
                 case JFileChooser.CANCEL_OPTION:
-                    logger.info("Cancel");
+                    logger.fine("Cancel");
                     break;
                 case JFileChooser.ERROR_OPTION:
-                    logger.info("Error");
+                    logger.fine("Error");
+                    break;
+                default:
                     break;
                 }
             }
         });
-        
+
         mnFilef.add(mntmOpen);
         mnFilef.add(mntmSave);
         mnFilef.addSeparator();
@@ -167,13 +176,14 @@ public class LifeFrame extends JFrame {
         mnFilef.add(mntmExitx);
         menuBar.add(mnFilef);
 
-        mnInterval = new RadioMenu("Interval", new Integer[]{ 33, 67, 100, 200, 500, 1000 });
+        mnInterval = new RadioMenu("Interval", new Integer[] { 33, 67, 100,
+                200, 500, 1000 });
         mnInterval.setSelectedIndex(2);
         mnInterval.addActionListener(new IntervalChangeListener());
         mnInterval.setMnemonic('I');
         menuBar.add(mnInterval);
-        
-        mnSize = new RadioMenu("Size", new Integer[]{ 4, 6, 8, 10 });
+
+        mnSize = new RadioMenu("Size", new Integer[] { 4, 6, 8, 10 });
         mnSize.setMnemonic('S');
         mnSize.setSelectedIndex(1);
         mnSize.addActionListener(new SizeChangeListener());
@@ -183,6 +193,10 @@ public class LifeFrame extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));
         setContentPane(contentPane);
+    }
+
+    public LifePanel getContentPane() {
+        return contentPane;
     }
 
 }

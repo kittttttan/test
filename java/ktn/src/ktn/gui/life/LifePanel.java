@@ -26,7 +26,7 @@ public class LifePanel extends JPanel {
     private Timer timer = new Timer(100, new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             repaint();
-            generation = cells.next();
+            generation = getCells().next();
         }
     });
 
@@ -45,11 +45,11 @@ public class LifePanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Point p = e.getPoint();
-                final int x = p.x / cellSize;
-                final int y = p.y / cellSize;
-                logger.info("mouse: ("+ x +","+ y +")");
+                final int x = p.x / getCellSize();
+                final int y = p.y / getCellSize();
+                logger.fine("mouse: ("+ x +","+ y +")");
                 try {
-                    cells.inc(x, y);
+                    getCells().inc(x, y);
                     repaint();
                 } catch (ArrayIndexOutOfBoundsException ex) {
                     logger.warning(ex.toString());
@@ -73,7 +73,7 @@ public class LifePanel extends JPanel {
     }
     
     public void reset() {
-        logger.info("reset");
+        logger.fine("reset");
         
         cells.reset();
         generation = 0;
@@ -87,7 +87,7 @@ public class LifePanel extends JPanel {
         final int h = height / cellSize;
         
         cells.resize(w, h);
-        logger.info("resize: "+ width +"x"+ height);
+        logger.fine("resize: "+ width +"x"+ height);
     }
 
     public Timer getTimer() {

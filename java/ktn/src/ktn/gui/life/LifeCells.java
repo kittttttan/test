@@ -166,9 +166,10 @@ public class LifeCells {
         }
 
         // swap
-        int[][] t = cells;
+        //int[][] t = cells;
+        //cells = newCells;
+        //newCells = t;
         cells = newCells;
-        newCells = t;
 
         width = w;
         height = h;

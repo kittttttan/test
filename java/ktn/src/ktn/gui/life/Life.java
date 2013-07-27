@@ -8,13 +8,14 @@ public class Life {
 
     /**
      * Launch the application.
+     * @param args
      */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    window = new Life();
-                    window.frame.setVisible(true);
+                    setWindow(new Life());
+                    getWindow().getFrame().setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -40,7 +41,16 @@ public class Life {
         return window;
     }
 
-    public LifeFrame getFrame() {
+    protected LifeFrame getFrame() {
         return frame;
     }
+
+    protected static Life getWindow() {
+        return window;
+    }
+
+    protected static void setWindow(Life window) {
+        Life.window = window;
+    }
+    
 }
