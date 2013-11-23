@@ -79,13 +79,13 @@ function dateFormat(s, d) {
       .replace(/s/g, function() { return d.getSeconds()+''; })
       .replace(/S+/g, function() { return d.getMilliseconds()+''; })
       .replace(/Z+/g, function() {
-        var t = d.getTimezoneOffset(), z = -t / 60, s;
+        var t = d.getTimezoneOffset(), z = -t / 60, str;
         if (z < 0) {
-          s = '-' + ('0' + (-z)).slice(-2);
+          str = '-' + ('0' + (-z)).slice(-2);
         } else {
-          s = '+' + ('0' + z).slice(-2);
+          str = '+' + ('0' + z).slice(-2);
         }
-        return s + ('0' + t % 60).slice(-2);
+        return str + ('0' + t % 60).slice(-2);
       })
       .replace(/E+/g, function() {
         switch(d.getDay()) {
@@ -98,8 +98,7 @@ function dateFormat(s, d) {
         case 6: return 'Sat';
         default: throw 'unexpected day';
         }
-      })
-      ;
+      });
 }
 
 /**

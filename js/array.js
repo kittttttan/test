@@ -56,7 +56,7 @@ var ArrayUtil = {
   filter: function(a, f) {
     var aNew = [];
     for (var i = 0, l = a.length; i < l; ++i) {
-      if (func(aNew[i])) {
+      if (f(aNew[i])) {
         aNew.push(a[i]);
       }
     }
@@ -169,7 +169,7 @@ var ArrayUtil = {
     }
     if (start > opt_last) {
       if (opt_step > 0) { return a; }
-      if (!opt_step) { step = -1; }
+      if (!opt_step) { opt_step = -1; }
       for (i = start; i > opt_last; i += opt_step) {
         a.push(i);
       }

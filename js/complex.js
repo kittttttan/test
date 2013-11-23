@@ -6,27 +6,27 @@
  * @class Complex
  */
 function Complex(r, i) {
-  this._r = +r;
-  this._i = +i;
+  this.r_ = +r;
+  this.i_ = +i;
 };
 
 Complex.prototype = {
 //  constructor: Complex,
 //  toString: function() {
-//    return '(' + this._r + '+' + this._i +'J)';
+//    return '(' + this.r_ + '+' + this.i_ +'J)';
 //  },
 //  clone: function() {
-//    return new Complex(this._r, this._i);
+//    return new Complex(this.r_, this.i_);
 //  },
 //  scale: function(a) {
-//    return new Complex(this._r * a, this._i * a);
+//    return new Complex(this.r_ * a, this.i_ * a);
 //  },
   /**
    * @method Complex#conjugate
    * @return {Complex}
    */
   conj: function() {
-    return new Complex(this._r, -this._i);
+    return new Complex(this.r_, -this.i_);
   },
   /**
    * @method Complex#add
@@ -34,7 +34,7 @@ Complex.prototype = {
    * @return {Complex}
    */
   add: function(a) {
-    return new Complex(this._r + a._r, this._i + a._i);
+    return new Complex(this.r_ + a.r_, this.i_ + a.i_);
   },
   /**
    * @method Complex#sub
@@ -42,7 +42,7 @@ Complex.prototype = {
    * @return {Complex}
    */
   sub: function(a) {
-    return new Complex(this._r - a._r, this._i - a._i);
+    return new Complex(this.r_ - a.r_, this.i_ - a.i_);
   },
   /**
    * @method Complex#mul
@@ -50,8 +50,8 @@ Complex.prototype = {
    * @return {Complex}
    */
   mul: function(a) {
-    return new Complex(this._r * a._r - this._i * a._i,
-        this._r * a._i + this._i * a._r);
+    return new Complex(this.r_ * a.r_ - this.i_ * a.i_,
+        this.r_ * a.i_ + this.i_ * a.r_);
   }
 };
 

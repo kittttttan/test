@@ -1,7 +1,75 @@
 (function(exports){
 'use strict';
 
-var rand = Math.random;
+var rnd = Math.random;
+
+/**
+ * @param {number} n
+ * @param {number} len
+ * @return {string}
+ */
+function hex(n, len) {
+  var z;
+  
+  switch (len) {
+  case 4: z = '0000'; break;
+  case 8: z = '00000000'; break;
+  case 12: z = '000000000000'; break;
+  case 16: z = '0000000000000000'; break;
+  default: throw new Error('invalid value: '+ len);
+  }
+  
+  return (z + n.toString(16)).slice(-len);
+}
+
+/**
+ * @param {Uuid} u
+ * @param {string} id
+ * @return {Uuid}
+ */
+function uuidStr(u, id) {
+  if (id.charAt(0) === '{') {
+    id = id.substring(1);
+  }
+  
+  u._time_low = parseInt(id.substring(0, 8), 16);
+  u._time_mid = parseInt(id.substring(9, 13), 16);
+  u._version = parseInt(id.substring(14, 15), 16);
+  u._time_hi = parseInt(id.substring(15, 18), 16);
+  u._variant = 8;
+  u._clock_seq = parseInt(id.substring(19, 23), 16) - (u._variant << 12);
+  u._node = parseInt(id.substring(24), 16);
+  
+  return u;
+}
+
+/**
+ * @param {number} n
+ * @return {number}
+ */
+function rand(n) {
+  if (n < 0) { return NaN; }
+  if (n <= 30) { return (0 | rnd() * (1 << n)); }
+  if (n <= 53) { return (0 | rnd() * (1 << 30))
+                    + (0 | rnd() * (1 << (n - 30))) * (1 << 30); }
+  return NaN;
+}
+
+/**
+ * @param {Uuid} u
+ * @return {string}
+ */
+function uuid4(u) {  
+  u._time_low = rand(32);
+  u._time_mid = rand(16);
+  u._version = 4;
+  u._time_hi = rand(12);
+  u._variant = 8;
+  u._clock_seq = rand(14);
+  u._node = rand(48);
+  
+  return u.toString();
+}
 
 /**
  * A Universally Unique IDentifier (UUID) URN Namespace
@@ -104,7 +172,7 @@ Uuid.prototype = {
    * @method Uuid#clone
    * @return {Uuid}
    */
-  clone: function(u) {
+  clone: function() {
     var u = new Uuid();
     u._time_low = this._time_low;
     u._time_mid = this._time_mid;
@@ -123,8 +191,7 @@ Uuid.prototype = {
    * @return {boolean}
    */
   equals: function(u) {
-    return
-      this._time_low === u._time_low &&
+    return this._time_low === u._time_low &&
       this._time_mid === u._time_mid &&
       this._version === u._version &&
       this._time_hi === u._time_hi &&
@@ -151,79 +218,11 @@ Uuid.prototype = {
 function uuid(ver) {
   ver = (ver | 0) || 4;
   if (1 <= ver && ver <= 5) {
-    if (ver !== 4) throw new Error('Not implemented version: '+ ver);
+    if (ver !== 4) { throw new Error('Not implemented version: '+ ver); }
     return new Uuid(ver);
   }
   
   throw new Error('invalid version: '+ ver);
-}
-
-/**
- * @param {Uuid} u
- * @param {string} id
- * @return {Uuid}
- */
-function uuidStr(u, id) {
-  if (id.charAt(0) === '{') {
-    id = id.substring(1);
-  }
-  
-  u._time_low = parseInt(id.substring(0, 8), 16);
-  u._time_mid = parseInt(id.substring(9, 13), 16);
-  u._version = parseInt(id.substring(14, 15), 16);
-  u._time_hi = parseInt(id.substring(15, 18), 16);
-  u._variant = 8;
-  u._clock_seq = parseInt(id.substring(19, 23), 16) - (u._variant << 12);
-  u._node = parseInt(id.substring(24), 16);
-  
-  return u;
-}
-
-/**
- * @param {number} n
- * @return {number}
- */
-function rand(n) {
-  if (n < 0) return NaN;
-  if (n <= 30) return (0 | rand() * (1 << n));
-  if (n <= 53) return (0 | rand() * (1 << 30))
-                    + (0 | rand() * (1 << (n - 30))) * (1 << 30);
-  return NaN;
-}
-
-/**
- * @param {number} n
- * @param {number} len
- * @return {string}
- */
-function hex(n, len) {
-  var z;
-  
-  switch (len) {
-  case 4: z = '0000'; break;
-  case 8: z = '00000000'; break;
-  case 12: z = '000000000000'; break;
-  case 16: z = '0000000000000000'; break;
-  default: throw new Error('invalid value: '+ len);
-  }
-  
-  return (z + n.toString(16)).slice(-len);
-}
-
-/**
- * @param {Uuid} u
- * @return {string}
- */
-function uuid4(u) {  
-  u._time_low = rand(32);
-  u._time_mid = rand(16);
-  u._version = 4;
-  u._time_hi = rand(12);
-  u._variant = 8;
-  u._clock_seq = rand(14);
-  u._node = rand(48);
-  
-  return u.toString();
 }
 
 // exports

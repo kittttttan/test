@@ -7,44 +7,6 @@
  */
 var StringConverter = {
   /**
-   * Convert string format
-   * @method StringConverter.format
-   * @param {string} str
-   * @param {number} option
-   * <pre>
-   *   0 to upper
-   *   1 to lower
-   *   2 to zenkaku
-   *   3 to hankaku
-   *   4 to katakana
-   *   5 to hiragana
-   *   6 proper
-   * </pre>
-   * @return {string}
-   */
-  convert: function(str, option) {
-    switch (option) {
-      case 0:
-        return str.toUpperCase();
-      case 1:
-        return str.toLowerCase();
-      case 2:
-        return this.toZenkakuKatakana(toZenkaku(str));
-      case 3:
-        return this.toHankakuKatakana(toHankaku(str));
-      case 4:
-        return this.toKatakana(str);
-      case 5:
-        return this.toHiragana(str);
-      case 6:
-        return this.proper(str);
-      default:
-        break;
-    }
-    return str;
-  },
-
-  /**
    * @method StringConverter.toZenkaku
    * @param {string} str
    * @return {string}
@@ -64,8 +26,8 @@ var StringConverter = {
    */
   toZenkakuKatakana: function(str) {
   var conv = [], c  = '', n = 0,
-      zen = "。「」、ヲァィゥェォャュョッアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン゛゜".split(''),
-      han = "｡｢｣､ｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝﾞﾟ".split('');
+      zen = '。「」、ヲァィゥェォャュョッアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン゛゜'.split(''),
+      han = '｡｢｣､ｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝﾞﾟ'.split('');
     for (var i = 0, l = str.length; i < l; ++i) {
       c = str.charAt(i);
       n = han.indexOf(c);
@@ -97,8 +59,8 @@ var StringConverter = {
    */
   toHankakuKatakana: function(str) {
   var conv = [], c  = '', n = 0,
-      zen = "。「」、ヲァィゥェォャュョッアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン゛゜".split(''),
-      han = "｡｢｣､ｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝﾞﾟ".split('');
+      zen = '。「」、ヲァィゥェォャュョッアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン゛゜'.split(''),
+      han = '｡｢｣､ｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝﾞﾟ'.split('');
     for (var i = 0, l = str.length; i < l; ++i) {
       c = str.charAt(i);
       n = zen.indexOf(c);
@@ -141,6 +103,44 @@ var StringConverter = {
     return str.replace(/(\w+)/g, function(a) {
       return a.charAt(0).toUpperCase() + a.substring(1).toLowerCase();
     });
+  },
+
+  /**
+   * Convert string format
+   * @method StringConverter.format
+   * @param {string} str
+   * @param {number} option
+   * <pre>
+   *   0 to upper
+   *   1 to lower
+   *   2 to zenkaku
+   *   3 to hankaku
+   *   4 to katakana
+   *   5 to hiragana
+   *   6 proper
+   * </pre>
+   * @return {string}
+   */
+  convert: function(str, option) {
+    switch (option) {
+      case 0:
+        return str.toUpperCase();
+      case 1:
+        return str.toLowerCase();
+      case 2:
+        return this.toZenkakuKatakana(this.toZenkaku(str));
+      case 3:
+        return this.toHankakuKatakana(this.toHankaku(str));
+      case 4:
+        return this.toKatakana(str);
+      case 5:
+        return this.toHiragana(str);
+      case 6:
+        return this.proper(str);
+      default:
+        break;
+    }
+    return str;
   }
 };
 

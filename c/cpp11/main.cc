@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <algorithm>
 #include <vector>
-//#include <initializer_list>
+#include <initializer_list>
 #include <regex>
 #include <random>
 
@@ -44,8 +44,8 @@ class X {
 
 // override and final
 struct Base {
-    //Base() = default;
-    //Base(const Base&) = delete;
+    Base() = default;
+    Base(const Base&) = delete;
     virtual void some_func(int);
     virtual void final_func() final;
 };
@@ -56,16 +56,16 @@ struct Derived : Base {
     //void final_func();
 };
 
-//class InitList {
-//public:
-//    InitList() { }
-//    InitList(std::initializer_list<int> list) {
-//        std::for_each(list.begin(), list.end(), [](int n) { printf("%d\n", n); });
-//    }
-//};
-//void func_init_list(std::initializer_list<int> list) {
-//    std::for_each(list.begin(), list.end(), [](int n) { printf("%d\n", n); });
-//}
+class InitList {
+public:
+    InitList() { }
+    InitList(std::initializer_list<int> list) {
+        std::for_each(list.begin(), list.end(), [](int n) { printf("%d\n", n); });
+    }
+};
+void func_init_list(std::initializer_list<int> list) {
+    std::for_each(list.begin(), list.end(), [](int n) { printf("%d\n", n); });
+}
 
 int main() {
     printf("** Rvalue references **\n");
@@ -99,7 +99,7 @@ int main() {
 
     printf("\n** Right angle brackets **\n");
     // illegal
-    // std::vector<SomeType<1>2>> x1;
+    //std::vector<SomeType<1>2>> x1;
 
     // legal
     const std::vector<SomeType<(1>2)>> x1;
@@ -149,8 +149,8 @@ int main() {
     	printf("%d\n", x);
     }
 
-    //InitList list({1, 2, 3});
-    //func_init_list({1,2,3});
+    InitList list({1, 2, 3});
+    func_init_list({1,2,3});
 
     printf("\n** regex **\n");
     std::regex re("\\d+");

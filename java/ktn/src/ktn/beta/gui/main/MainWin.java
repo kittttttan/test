@@ -1,7 +1,6 @@
 package ktn.beta.gui.main;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 
 public class MainWin {
@@ -36,7 +35,7 @@ public class MainWin {
      */
     private void initialize() {
         frame = new Frame();
-        frame.setBounds(100, 100, 450, 300);
+        frame.setSize(640, 480);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 

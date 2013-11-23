@@ -99,9 +99,8 @@ var StringUtil = {
    */
   escapeJS: function(s) {
     return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"')
-        .replace(/'/g, "\\'").replace(/\//g, '\\/') // '
-        // .replace(/</g, '\\x3c').replace(/>/g, '\\x3e')
-        ;
+        .replace(/'/g, '\\\'').replace(/\//g, '\\/'); // '
+        // .replace(/</g, '\\x3c').replace(/>/g, '\\x3e');
   },
 
   /**
@@ -152,7 +151,7 @@ var StringUtil = {
    */
   endsWith: function(src, suffix) {
     var len = suffix.length;
-    if (src.length < len) return false;
+    if (src.length < len) { return false; }
     return src.slice(-len) === suffix;
   },
 

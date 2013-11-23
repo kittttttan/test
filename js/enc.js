@@ -18,7 +18,7 @@ var Encode = {
    * @return {string} unary coding
    */
   unary: function(n, alt) {
-    if (n < 0) return undefined;
+    if (n < 0) { return undefined; }
     
     var former;
     var latter;
@@ -39,7 +39,7 @@ var Encode = {
    * @return {string} Elias gamma coding
    */
   eliasGamma: function(n) {
-    if (n < 1) return undefined;
+    if (n < 1) { return undefined; }
     
     var bin = n.toString(2);
     return repeat('0', bin.length - 1) + bin;
@@ -51,7 +51,7 @@ var Encode = {
    * @return {string} Elias delta coding
    */
   eliasDelta: function(n) {
-    if (n < 1) return undefined;
+    if (n < 1) { return undefined; }
     
     var bin = n.toString(2);
     var gamma = Encode.eliasGamma(bin.length);
@@ -64,7 +64,7 @@ var Encode = {
    * @return {string} Elias omega coding
    */
   eliasOmega: function(n) {
-    if (n < 1) return undefined;
+    if (n < 1) { return undefined; }
     
     var res = '0';
     var bin;
@@ -84,10 +84,10 @@ var Encode = {
    * @return {string} Golomb coding
    */
   golomb: function(n, m) {
-    if (n < 0) return undefined;
+    if (n < 0) { return undefined; }
 
     m = (m | 0) || 8;
-    if (m < 1) return undefined;
+    if (m < 1) { return undefined; }
     
     var q = n / m | 0;
     var r = n % m;
@@ -126,7 +126,7 @@ var Decode = {
    */
   unary: function(str, alt) {
     var res = [];
-    if (!str) return res;
+    if (!str) { return res; }
     
     var former;
     var latter;
@@ -164,12 +164,13 @@ var Decode = {
    */
   eliasGamma: function(str) {
     var res = [];
-    if (!str) return res;
+    if (!str) { return res; }
     
     var l = str.length;
     var cnt = 0;
     var bin = '';
-    var i, j;
+    var i;
+    //var j;
     for (i = 0; i < l; ++i) {
       if (str.charAt(i) === '0') {
         ++cnt;
@@ -201,13 +202,14 @@ var Decode = {
    */
   eliasDelta: function(str) {
     var res = [];
-    if (!str) return res;
+    if (!str) { return res; }
     
     var l = str.length;
     var cnt = 0;
     var bin = '';
     var gamma;
-    var i, j, k;
+    var i;
+    //var j, k;
     for (i = 0; i < l; ++i) {
       if (str.charAt(i) === '0') {
         ++cnt;
@@ -251,12 +253,13 @@ var Decode = {
    */
   eliasOmega: function(str) {
     var res = [];
-    if (!str) return res;
+    if (!str) { return res; }
     
     var n = 1;
     var l = str.length;
     var bin = '';
-    var i, j;
+    var i;
+    //var j;
     for (i = 0; i < l; ++i) {
       if (str.charAt(i) === '0') {
         res.push(n);

@@ -24,11 +24,11 @@ function test(size, show) {
   }
   console.log(' ---');
   for (i = 0; i < size; ++i) {
-    console.log(cs[i]._r);
+    console.log(cs[i].r_);
   }
   console.log(' ---');
   for (i = 0; i < size; ++i) {
-    console.log(sc[i]._r);
+    console.log(sc[i].r_);
   }
 }
 
@@ -53,7 +53,7 @@ function test2(size) {
   }
   var cr = ifft(cc);
   for (i = 0; i < cc.length; ++i) {
-    console.log(cr[i]._r);
+    console.log(cr[i].r_);
   }
 }
 
