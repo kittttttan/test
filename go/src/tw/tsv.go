@@ -11,7 +11,7 @@ import (
     "github.com/PuerkitoBio/goquery"
 )
 
-const tfOut = "2006-01-02 15:04:06"
+const tfOut = "2006-01-02 15:04:05"
 
 func HtmlToTsv(f *os.File) string {
     str := ""
