@@ -40,6 +40,7 @@ func main() {
     defer f.Close()
 
     str := tw.HtmlToTsv(f)
+    //str := tw.ProfToTsv(f)
 
     if outName == "" {
         ext := filepath.Ext(inName)

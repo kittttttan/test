@@ -54,3 +54,43 @@ func HtmlToTsv(f *os.File) string {
 
     return str
 }
+
+func ProfToTsv(f *os.File) string {
+    str := ""
+
+    doc, e := goquery.NewDocumentFromReader(f)
+    if e != nil {
+        log.Fatal(e)
+    }
+
+    doc.Find(".ProfileTweet").Each(func(i int, s *goquery.Selection) {
+        name := s.Find(".ProfileTweet-fullname").Text()
+        if name == "" {
+            return
+        }
+        if name[0] != '\'' {
+            name = "'" + name
+        }
+
+        text := s.Find(".ProfileTweet-text").Text()
+        if text[0] != '\'' {
+            text = "'" + text
+        }
+
+        ts := s.Find(".ProfileTweet-timestamp")
+        url, _ := ts.Attr("href")
+
+        ts2 := ts.Find(".js-short-timestamp")
+        ms, _ := ts2.Attr("data-time")
+        ms64, _ := strconv.ParseInt(ms, 10, 64)
+        t := time.Unix(ms64, 0)
+        timestamp := t.Format(tfOut)
+
+        str = str + fmt.Sprintf("\"%s\"\t\"%s\"\t%s\t%s\n",
+            strings.Replace(name, "\"", "\"\"", -1),
+            strings.Replace(text, "\"", "\"\"", -1),
+            timestamp, url)
+    })
+
+    return str
+}
